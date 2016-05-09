@@ -28,64 +28,55 @@ package de.javagl.layoutanalyzer;
 
 import java.util.List;
 
-
 /**
  * Abstract base implementation of an {@link Aspect}
  */
-abstract class AbstractAspect implements Aspect
-{
-    /**
-     * The name of this aspect. 
-     */
-    private final String name;
-    
-    /**
-     * The weight of this aspect
-     */
-    private double weight;
-    
-    /**
-     * Default constructor
-     * 
-     * @param name The name of this aspect
-     */
-    protected AbstractAspect(String name)
-    {
-        this.name = name;
-        this.weight = 1.0;
-    }
+abstract public class AbstractAspect implements Aspect {
+	/**
+	 * The name of this aspect.
+	 */
+	private final String name;
 
-    @Override
-    public final String getName()
-    {
-        return name;
-    }
+	/**
+	 * The weight of this aspect
+	 */
+	private double weight;
 
-    @Override
-    public final double getWeight()
-    {
-        return weight;
-    }
+	/**
+	 * Default constructor
+	 * 
+	 * @param name
+	 *            The name of this aspect
+	 */
+	protected AbstractAspect(String name) {
+		this.name = name;
+		this.weight = 1.0;
+	}
 
-    @Override
-    public final void setWeight(double weight)
-    {
-        this.weight = Math.min(1.0, Math.max(0.0, weight));
-    }
-    
-    @Override
-    public QualityData computeQualityData(
-        List<? extends LayoutObject> layoutObjects, LayoutData layoutDataHint)
-    {
-        LayoutData layoutData = layoutDataHint;
-        if (layoutData == null)
-        {
-            layoutData = computeLayoutData(layoutObjects);
-        }
-        // XXX TODO Avoid these VERY magic constants ASAP !!!
-        QualityData qualityData =
-            QualityDatas.computeFromForceLengths(layoutData, 0.0,  500.0);
-        return qualityData;
-    }
-    
+	@Override
+	public final String getName() {
+		return name;
+	}
+
+	@Override
+	public final double getWeight() {
+		return weight;
+	}
+
+	@Override
+	public final void setWeight(double weight) {
+		this.weight = Math.min(1.0, Math.max(0.0, weight));
+	}
+
+	@Override
+	public QualityData computeQualityData(List<? extends LayoutObject> layoutObjects, LayoutData layoutDataHint) {
+		LayoutData layoutData = layoutDataHint;
+		if (layoutData == null) {
+			layoutData = computeLayoutData(layoutObjects);
+		}
+		// XXX TODO Avoid these VERY magic constants ASAP !!!
+		QualityData qualityData = QualityDatas.computeFromForceLengths(layoutData, 0.0, 500.0);
+		return qualityData;
+	}
+
 }

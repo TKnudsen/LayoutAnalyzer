@@ -126,7 +126,7 @@ public class LayoutObject {
 	 *
 	 * @return The position
 	 */
-	Point2D getPosition() {
+	public Point2D getPosition() {
 		return new Point2D.Double(position.getX(), position.getY());
 	}
 
