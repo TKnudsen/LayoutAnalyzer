@@ -84,10 +84,10 @@ public class LayoutAnalyzerMain
         // Create the Aspects that should determine the layout
         List<Aspect> aspects = new ArrayList<Aspect>();
         aspects.add(new TargetPositionForce(layout.getLayoutObjects()));
-        aspects.add(new PairwiseRepulsionForce(300.0));
+        aspects.add(new PairwiseRepulsionForce(0.3));
         aspects.add(new ShapeBoundsRepulsionForce());
         aspects.add(new ShapeBoundsBorderRepulsionForce(
-            new Rectangle2D.Double(200, 200, WIDTH-400,HEIGHT-400)));
+            new Rectangle2D.Double(0.2, 0.2, 0.6,0.6)));
         
         // Create the control panel, containing one AspectPanel for
         // each aspect, offering a slider for the weight, and a 

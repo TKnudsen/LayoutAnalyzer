@@ -164,10 +164,13 @@ public class LayoutPanel extends JPanel {
 
 		List<LayoutObject> layoutObjects = layout.getLayoutObjects();
 		for (LayoutObject layoutObject : layoutObjects) {
+			AffineTransform scale = AffineTransform.getScaleInstance(getWidth(), getHeight());
 			Point2D position = layoutObject.getPosition();
+			scale.transform(position, position);
 
 			Shape shape = layoutObject.getShape();
 			AffineTransform at = AffineTransform.getTranslateInstance(position.getX(), position.getY());
+			at.scale(getWidth(), getHeight());
 			Shape paintedShape = at.createTransformedShape(shape);
 			g.setColor(new Color(32, 32, 32, 32));
 			g.fill(paintedShape);
@@ -197,8 +200,10 @@ public class LayoutPanel extends JPanel {
 
 		List<LayoutObject> layoutObjects = layout.getLayoutObjects();
 		for (LayoutObject layoutObject : layoutObjects) {
+			AffineTransform scale = AffineTransform.getScaleInstance(getWidth(), getHeight());
 			Point2D position = layoutObject.getPosition();
-
+			scale.transform(position, position);
+			
 			int n = 0;
 			for (Aspect aspect : layouterData.getAspects()) {
 				LayoutData layoutData = layouterData.getLayoutData(aspect);
@@ -206,6 +211,7 @@ public class LayoutPanel extends JPanel {
 				g.setColor(Colors.getColorWithAlpha(n, 0.25));
 
 				Point2D force = layoutData.getForce(layoutObject);
+				scale.transform(force, force);
 				Point2D tip = Points.add(position, force, null);
 				Shape arrow = arrowCreator.buildShape(position, tip, 1.0);
 				g.fill(arrow);
