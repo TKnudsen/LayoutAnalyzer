@@ -77,8 +77,8 @@ public class Layouts {
 	 *            The {@link Layout}
 	 */
 	public static void initTestData(Layout layout) {
-		initTestData(layout, 30, 100, 900, 100, 900);
-		initTestData(layout, 10, 300, 600, 600, 500);
+		initTestData(layout, 30, 0.1, 0.9, 0.1, 0.9);
+		initTestData(layout, 10, 0.3, 0.6, 0.6, 0.5);
 	}
 
 	/**
@@ -97,11 +97,12 @@ public class Layouts {
 	 * @param maxY
 	 *            The maximum y-coordinate for the objects, exclusive
 	 */
-	private static void initTestData(Layout layout, int numObjects, double minX, double maxX, double minY, double maxY) {
-		double minSizeX = 30;
-		double maxSizeX = 150;
-		double minSizeY = 30;
-		double maxSizeY = 150;
+	private static void initTestData(Layout layout, int numObjects, double minX, double maxX, double minY,
+			double maxY) {
+		double minSizeX = 0.03;
+		double maxSizeX = 0.15;
+		double minSizeY = 0.03;
+		double maxSizeY = 0.15;
 		Random random = new Random(0);
 		for (int i = 0; i < numObjects; i++) {
 			LayoutObject p = new LayoutObject(String.valueOf(i));
