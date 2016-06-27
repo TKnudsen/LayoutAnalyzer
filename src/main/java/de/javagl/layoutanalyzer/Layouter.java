@@ -162,7 +162,7 @@ public class Layouter {
 	 * the accelerations, velocities and positions of the {@link LayoutObject}
 	 * through a simple time integration.
 	 */
-	void performStep() {
+	public void performStep() {
 		LayouterData layouterData = computeLayouterData();
 
 		applyForces(layouterData);
