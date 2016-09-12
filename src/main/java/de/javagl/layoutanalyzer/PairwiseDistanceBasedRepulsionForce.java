@@ -92,25 +92,7 @@ public class PairwiseDistanceBasedRepulsionForce extends AbstractAspect {
 		// }
 		// }
 
-		// // V2a
-		// double d = repulsionDistance - distance;
-		// double weightCurrentDistance = calculateWeight(distance);
-		// double weight = calculateWeight(1 - repulsionDistance);
-		// d *= weightCurrentDistance;
-		// d *= weightCurrentDistance;
-		// d *= weight;
-		// d *= weight;
-		// d /= (n * 0.1);
-		//
-		// Point2D dir = Points.sub(position1, position0, null);
-		// Point2D force0 = layoutData.getForce(layoutObject0);
-		// Point2D force1 = layoutData.getForce(layoutObject1);
-		// Points.addScaled(force0, -d, dir, force0);
-		// Points.addScaled(force1, d, dir, force1);
-		// layoutData.setForce(layoutObject0, force0);
-		// layoutData.setForce(layoutObject1, force1);
-
-		// V2b
+		// V2
 		if (distance < repulsionDistance) {
 			// if (distance > EPSILON) {
 			double d = repulsionDistance - distance;
@@ -129,22 +111,6 @@ public class PairwiseDistanceBasedRepulsionForce extends AbstractAspect {
 			layoutData.setForce(layoutObject1, force1);
 			// }
 		}
-
-		// //V3
-		// if (distance < repulsionDistance) {
-		// if (distance > EPSILON) {
-		// double d = repulsionDistance- distance;
-		// d *= (1 / d);
-		//
-		// Point2D dir = Points.sub(position1, position0, null);
-		// Point2D force0 = layoutData.getForce(layoutObject0);
-		// Point2D force1 = layoutData.getForce(layoutObject1);
-		// Points.addScaled(force0, d, dir, force0);
-		// Points.addScaled(force1, -d, dir, force1);
-		// layoutData.setForce(layoutObject0, force0);
-		// layoutData.setForce(layoutObject1, force1);
-		// }
-		// }
 	}
 
 	/**

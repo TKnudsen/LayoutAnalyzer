@@ -91,14 +91,8 @@ public class PairwiseDistanceBasedAttractionForce extends AbstractAspect {
 					 d *= (n*0.075);
 					// d *= weight;
 
-					if (d > 0.2)
-						System.out.println("debug");
-
 					// V3
 //					d *= (1 / d);
-
-					if (d > 1.0)
-						System.out.println("debug");
 
 					d *= weight;
 
