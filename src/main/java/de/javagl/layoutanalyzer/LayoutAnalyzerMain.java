@@ -72,7 +72,7 @@ public class LayoutAnalyzerMain
 
         // Create the Layout and initialize it with some test data
         Layout layout = new Layout();
-        Layouts.initTestData(layout);
+		Layouts.initTestData(layout);
         
         // Create the panel that shows the layout
         int WIDTH = 1000;
@@ -84,7 +84,7 @@ public class LayoutAnalyzerMain
         // Create the Aspects that should determine the layout
         List<Aspect> aspects = new ArrayList<Aspect>();
         aspects.add(new TargetPositionForce(layout.getLayoutObjects()));
-        aspects.add(new PairwiseRepulsionForce(0.3));
+        aspects.add(new PairwiseRepulsionForce(0.1));
         aspects.add(new ShapeBoundsRepulsionForce());
         aspects.add(new ShapeBoundsBorderRepulsionForce(
             new Rectangle2D.Double(0.2, 0.2, 0.6,0.6)));
