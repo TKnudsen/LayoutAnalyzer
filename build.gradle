@@ -1,76 +1,53 @@
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
+allprojects {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
 
-repositories {
-	mavenCentral()
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.10'
-}
-
-task sourceJar(type: Jar) {
-	description = "Create a JAR with all sources"
-	from sourceSets.main.allSource
-	classifier = 'sources'
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	description = "Create a JAR with the JavaDoc for the java sources"
-	from javadoc.destinationDir
-	classifier = 'javadoc'
-}
-
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-mainClassName = "de.javagl.layoutanalyzer.LayoutAnalyzerMain"
-
-dependencies {
-	compile 'de.javagl:geom:0.0.1'
-	compile 'de.javagl:swing-tasks:0.0.1'
-	compile 'de.javagl:viewer:0.0.2'
-	compile 'de.javagl:viewer-functions:0.0.1'
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourceJar {
-                classifier "sources"
-            }
-        }
-    }
+    // TODO change to real group
+    group = 'layoutanaylyzer'
+    version '0.1-SNAPSHOT'
 
     repositories {
-        maven {
-            if (project.hasProperty('artifactoryUsername') && project.hasProperty('artifactoryPassword')) {
-                logger.warn('Using ~/.gradle/gradle.properties for artifactory settings')
-                credentials {
-                    username artifactoryUsername
-                    password artifactoryPassword
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    task sourceJar(type: Jar) {
+        description = "Create a JAR with all sources"
+        from sourceSets.main.allSource
+        classifier = 'sources'
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        description = "Create a JAR with the JavaDoc for the java sources"
+        from javadoc.destinationDir
+        classifier = 'javadoc'
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifact sourceJar {
+                    classifier "sources"
                 }
-                url "http://ivasrv.igd.fraunhofer.de:8081/artifactory/libs-release-local"
-            } else if(System.hasProperty('ARTIFACTORY_USERNAME') 
-            			&& System.hasProperty('ARTIFACTORY_PASSWORD')
-            			&& System.hasProperty('ARTIFACTORY_URL')) {
-                logger.warn('Using environment for artifactory settings')
-                credentials {
-                    username "$System.env.ARTIFACTORY_USERNAME"
-                    password "$System.env.ARTIFACTORY_PASSWORD"
-                }
-                url "$System.env.ARTIFACTORY_URL"
-            } else {
-                logger.warn('Artifactory credentials not specified')
-                logger.warn('Please set "artifactoryUsername" and "artifactoryPasswort" in your ~/.gradle/gradle.properties file.')
-                logger.warn('You can use the LDAP password hash (Artifactory -> Profile -> Unlock -> Maven Settings)')
-                logger.warn('If you are using a CI build you can also set the environment variables')
-                logger.warn('ARTIFACTORY_USERNAME, ARTIFACTORY_PASSWORD, ARTIFACTORY_URL')
             }
         }
+
+        repositories {
+          
+        }
     }
+}
+
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.14'
 }

@@ -1,0 +1,10 @@
+apply plugin: 'application'
+
+mainClassName = "de.javagl.layoutanalyzer.LayoutAnalyzerMain"
+
+dependencies {
+	compile 'de.javagl:geom:0.0.1'
+	compile 'de.javagl:swing-tasks:0.0.1'
+	compile 'de.javagl:viewer:0.0.2'
+	compile 'de.javagl:viewer-functions:0.0.1'
+}
