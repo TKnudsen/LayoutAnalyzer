@@ -28,6 +28,8 @@ package de.javagl.layoutanalyzer;
 
 import java.util.List;
 
+import de.javagl.layoutanalyzer.quality.QualityData;
+
 /**
  * Interface for one "aspect" of a layout. It offers methods to compute the
  * {@link LayoutData} and the {@link QualityData} for a list of

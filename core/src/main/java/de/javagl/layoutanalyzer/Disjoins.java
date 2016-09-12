@@ -32,7 +32,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * Methods to compute disjoining movements between intervals and rectangles
  */
-class Disjoins {
+public class Disjoins {
 	/**
 	 * Computes the minimum movement that has to be added to the interval 0 so
 	 * that the intervals are disjoint
@@ -47,7 +47,7 @@ class Disjoins {
 	 *            The maximum of interval 1
 	 * @return The minimum disjoining movement
 	 */
-	static double computeMinDisjoinMovement(double min0, double max0, double min1, double max1) {
+	public static double computeMinDisjoinMovement(double min0, double max0, double min1, double max1) {
 		if (max0 < min1) {
 			return 0;
 		}
@@ -76,7 +76,7 @@ class Disjoins {
 	 *            The point that will store the result
 	 * @return The result
 	 */
-	static Point2D computeMinDisjoinMovement(Rectangle2D rectangle0, Rectangle2D rectangle1, Point2D result) {
+	public static Point2D computeMinDisjoinMovement(Rectangle2D rectangle0, Rectangle2D rectangle1, Point2D result) {
 		return computeMinDisjoinMovement(rectangle0.getMinX(), rectangle0.getMaxX(), rectangle0.getMinY(), rectangle0.getMaxY(), rectangle1.getMinX(), rectangle1.getMaxX(), rectangle1.getMinY(), rectangle1.getMaxY(), result);
 	}
 
@@ -106,7 +106,7 @@ class Disjoins {
 	 *            The point that will store the result
 	 * @return The result
 	 */
-	static Point2D computeMinDisjoinMovement(double minX0, double maxX0, double minY0, double maxY0, double minX1, double maxX1, double minY1, double maxY1, Point2D result) {
+	public static Point2D computeMinDisjoinMovement(double minX0, double maxX0, double minY0, double maxY0, double minX1, double maxX1, double minY1, double maxY1, Point2D result) {
 		if (result == null) {
 			result = new Point2D.Double();
 		}

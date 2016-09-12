@@ -1,7 +1,3 @@
-apply plugin: 'application'
-
-mainClassName = "de.javagl.layoutanalyzer.LayoutAnalyzerMain"
-
 dependencies {
 	compile 'de.javagl:geom:0.0.1'
 	compile 'de.javagl:swing-tasks:0.0.1'

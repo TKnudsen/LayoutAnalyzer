@@ -342,7 +342,7 @@ public class LayoutObject {
 	 * 
 	 * @return The shape bounds
 	 */
-	Rectangle2D getShapeBounds() {
+	public Rectangle2D getShapeBounds() {
 		AffineTransform at = AffineTransform.getTranslateInstance(position.getX(), position.getY());
 		Shape paintedShape0 = at.createTransformedShape(getShape());
 		return paintedShape0.getBounds2D();

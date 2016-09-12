@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = "de.javagl.layoutanalyzer.LayoutAnalyzerMain"
+
+dependencies {
+	compile project(':core')
+}

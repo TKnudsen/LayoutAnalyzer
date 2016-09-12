@@ -32,6 +32,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import de.javagl.layoutanalyzer.quality.QualityData;
+
 /**
  * A class summarizing the data that is computed by a {@link Layouter} in a
  * single {@link Layouter#performStep() step}. It combines the
@@ -87,7 +89,7 @@ public class LayouterData {
 	 *            The {@link Aspect}
 	 * @return The {@link LayoutData}
 	 */
-	LayoutData getLayoutData(Aspect aspect) {
+	public LayoutData getLayoutData(Aspect aspect) {
 		return layoutDatas.get(aspect);
 	}
 

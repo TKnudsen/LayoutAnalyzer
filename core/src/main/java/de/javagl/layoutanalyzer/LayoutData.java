@@ -82,7 +82,7 @@ public class LayoutData {
 	 * @return The weight
 	 * @see Aspect#setWeight(double)
 	 */
-	double getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
@@ -92,7 +92,7 @@ public class LayoutData {
 	 * 
 	 * @return The {@link LayoutObject}s
 	 */
-	List<LayoutObject> getLayoutObjects() {
+	public List<LayoutObject> getLayoutObjects() {
 		return layoutObjects;
 	}
 
