@@ -6,4 +6,4 @@ build/
 LayoutAnalyzer.iml
 LayoutAnalyzer.ipr
 LayoutAnalyzer.iws
-/bin/
+bin/
