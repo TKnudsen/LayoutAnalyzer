@@ -49,6 +49,7 @@ import de.javagl.layoutanalyzer.Layout;
 import de.javagl.layoutanalyzer.LayoutData;
 import de.javagl.layoutanalyzer.LayoutObject;
 import de.javagl.layoutanalyzer.LayouterData;
+import de.javagl.layoutanalyzer.utils.Colors;
 
 /**
  * A panel that shows a {@link Layout} consisting of {@link LayoutObject}s, and

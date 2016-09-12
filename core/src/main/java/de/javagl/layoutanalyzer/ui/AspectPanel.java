@@ -39,6 +39,7 @@ import javax.swing.event.ChangeListener;
 import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.quality.QualityData;
 import de.javagl.layoutanalyzer.quality.QualityDataRecorder;
+import de.javagl.layoutanalyzer.utils.Colors;
 
 /**
  * A panel containing basic control- and monitoring components for one

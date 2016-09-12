@@ -36,62 +36,53 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 import de.javagl.layoutanalyzer.quality.QualityDataRecorder;
+import de.javagl.layoutanalyzer.utils.Colors;
 import de.javagl.viewer.MouseControl;
 import de.javagl.viewer.functions.FunctionPanel;
 
 /**
- * A panel showing the contents of a {@link QualityDataRecorder} as a
- * set of plotted functions
+ * A panel showing the contents of a {@link QualityDataRecorder} as a set of plotted functions
  */
-class QualityDataRecorderPanel extends JPanel
-{
-    /**
-     * Serial UID
-     */
-    private static final long serialVersionUID = 4207630607915849318L;
+class QualityDataRecorderPanel extends JPanel {
+  /**
+   * Serial UID
+   */
+  private static final long serialVersionUID = 4207630607915849318L;
 
-    /**
-     * Creates a new panel that plots the functions from the given 
-     * {@link QualityDataRecorder} with the given base color
-     * 
-     * @param color The color 
-     * @param qualityDataRecorder The {@link QualityDataRecorder}
-     */
-    QualityDataRecorderPanel(
-        Color color, QualityDataRecorder qualityDataRecorder)
-    {
-        super(new GridLayout(1,1));
-        
-        FunctionPanel functionPanel = new FunctionPanel();
-        class SimpleMouseControl extends MouseAdapter implements MouseControl
-        {
-            private double zoomingSpeed = 0.15;
+  /**
+   * Creates a new panel that plots the functions from the given {@link QualityDataRecorder} with
+   * the given base color
+   * 
+   * @param color
+   *          The color
+   * @param qualityDataRecorder
+   *          The {@link QualityDataRecorder}
+   */
+  QualityDataRecorderPanel(Color color, QualityDataRecorder qualityDataRecorder) {
+    super(new GridLayout(1, 1));
 
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e)
-            {
-                double d = Math.pow(1+zoomingSpeed, e.getWheelRotation())-1;
-                double factorY = 1.0 + d;
-                Point2D p = functionPanel.getWorldToScreen().transform(
-                    new Point2D.Double(0,0), null);
-                functionPanel.zoom(p.getX(), p.getY(), 1.0, factorY);
-            }
-        }
-        functionPanel.setResizingContents(true);
-        functionPanel.setMouseControl(new SimpleMouseControl());
-        functionPanel.setDisplayedWorldArea(
-            new Rectangle2D.Double(-0.2, -0.2, 1.2, 1.8));
-        functionPanel.addFunctionWithValueLegend(
-            qualityDataRecorder.getMinQualityFunction(), 
-            Colors.getColorWithAlpha(color, 0.25), "Min");
-        functionPanel.addFunctionWithValueLegend(
-            qualityDataRecorder.getMaxQualityFunction(), 
-            Colors.getColorWithAlpha(color, 0.25), "Max");
-        functionPanel.addFunctionWithValueLegend(
-            qualityDataRecorder.getAvgQualityFunction(), 
-            color, "Avg");
-        add(functionPanel);
+    FunctionPanel functionPanel = new FunctionPanel();
+    class SimpleMouseControl extends MouseAdapter implements MouseControl {
+      private double zoomingSpeed = 0.15;
+
+      @Override
+      public void mouseWheelMoved(MouseWheelEvent e) {
+        double d = Math.pow(1 + zoomingSpeed, e.getWheelRotation()) - 1;
+        double factorY = 1.0 + d;
+        Point2D p = functionPanel.getWorldToScreen().transform(new Point2D.Double(0, 0), null);
+        functionPanel.zoom(p.getX(), p.getY(), 1.0, factorY);
+      }
     }
-    
-   
+    functionPanel.setResizingContents(true);
+    functionPanel.setMouseControl(new SimpleMouseControl());
+    functionPanel.setDisplayedWorldArea(new Rectangle2D.Double(-0.2, -0.2, 1.2, 1.8));
+    functionPanel.addFunctionWithValueLegend(qualityDataRecorder.getMinQualityFunction(),
+        Colors.getColorWithAlpha(color, 0.25), "Min");
+    functionPanel.addFunctionWithValueLegend(qualityDataRecorder.getMaxQualityFunction(),
+        Colors.getColorWithAlpha(color, 0.25), "Max");
+    functionPanel.addFunctionWithValueLegend(qualityDataRecorder.getAvgQualityFunction(), color,
+        "Avg");
+    add(functionPanel);
+  }
+
 }
