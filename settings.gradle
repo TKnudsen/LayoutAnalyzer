@@ -1,1 +1,6 @@
-include ':core', ':example'
+String name = "LayoutAnalyzer"
+rootProject.name = name
+
+include 'core', 'example'
+project(":core").name = "$name-core"
+project(":example").name = "$name-example"
