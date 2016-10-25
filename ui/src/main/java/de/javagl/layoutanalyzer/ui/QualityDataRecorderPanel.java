@@ -43,11 +43,13 @@ import de.javagl.viewer.functions.FunctionPanel;
 /**
  * A panel showing the contents of a {@link QualityDataRecorder} as a set of plotted functions
  */
-class QualityDataRecorderPanel extends JPanel {
+public class QualityDataRecorderPanel extends JPanel {
   /**
    * Serial UID
    */
   private static final long serialVersionUID = 4207630607915849318L;
+
+  private final FunctionPanel functionPanel;
 
   /**
    * Creates a new panel that plots the functions from the given {@link QualityDataRecorder} with
@@ -58,10 +60,10 @@ class QualityDataRecorderPanel extends JPanel {
    * @param qualityDataRecorder
    *          The {@link QualityDataRecorder}
    */
-  QualityDataRecorderPanel(Color color, QualityDataRecorder qualityDataRecorder) {
+  public QualityDataRecorderPanel(Color color, QualityDataRecorder qualityDataRecorder) {
     super(new GridLayout(1, 1));
 
-    FunctionPanel functionPanel = new FunctionPanel();
+    functionPanel = new FunctionPanel();
     class SimpleMouseControl extends MouseAdapter implements MouseControl {
       private double zoomingSpeed = 0.15;
 
@@ -83,6 +85,10 @@ class QualityDataRecorderPanel extends JPanel {
     functionPanel.addFunctionWithValueLegend(qualityDataRecorder.getAvgQualityFunction(), color,
         "Avg");
     add(functionPanel);
+  }
+
+  private void setDisplayedWorldArea(Rectangle2D area) {
+    functionPanel.setDisplayedWorldArea(area);
   }
 
 }

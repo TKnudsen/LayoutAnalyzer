@@ -78,6 +78,35 @@ public class Colors {
   }
 
   /**
+   * Returns the {@link #getColor(int) color}, but brightened with the given factor
+   * 
+   * @param n
+   *          The number
+   * @param factor
+   *          The brightening factor
+   * @return The new color
+   */
+  public static Color brighten(int n, float factor) {
+    return brighten(getColor(n), factor);
+  }
+
+  /**
+   * Returns the given color, but brightened with the given factor
+   * 
+   * @param color
+   *          The color
+   * @param factor
+   *          The brightening factor
+   * @return The new color
+   */
+  public static Color brighten(Color color, float factor) {
+    float red = (255 - color.getRed()) * factor + color.getRed();
+    float green = (255 - color.getGreen()) * factor + color.getGreen();
+    float blue = (255 - color.getBlue()) * factor + color.getBlue();
+    return new Color((int) red, (int) green, (int) blue, color.getAlpha());
+  }
+
+  /**
    * Private constructor to prevent instantiation
    */
   private Colors() {
