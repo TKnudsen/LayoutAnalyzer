@@ -52,7 +52,7 @@ public class QualityData
     /**
      * The list of {@link LayoutObject}s for which this data was computed
      */
-    private final List<LayoutObject> layoutObjects;
+    private final List<? extends LayoutObject> layoutObjects;
     
     /**
      * The weight which was set for the {@link Aspect} when this data was 
@@ -80,7 +80,7 @@ public class QualityData
      * @param layoutObjects The {@link LayoutObject}s 
      * @param weight The weight that was set in the {@link Aspect}
      */
-    QualityData(List<LayoutObject> layoutObjects, double weight)
+    public QualityData(List<? extends LayoutObject> layoutObjects, double weight)
     {
         this.layoutObjects = layoutObjects;
         this.weight = weight;
@@ -105,7 +105,7 @@ public class QualityData
      * 
      * @return The {@link LayoutObject}s
      */
-    List<LayoutObject> getLayoutObjects()
+    List<? extends LayoutObject> getLayoutObjects()
     {
         return layoutObjects;
     }
@@ -117,7 +117,7 @@ public class QualityData
      * @param layoutObject The {@link LayoutObject}
      * @param quality The quality
      */
-    void setQuality(LayoutObject layoutObject, double quality)
+    public void setQuality(LayoutObject layoutObject, double quality)
     {
         Objects.requireNonNull(layoutObject, "The layoutObject is null");
         qualities.put(layoutObject, quality);
@@ -131,7 +131,7 @@ public class QualityData
      * @param layoutObject The {@link LayoutObject}
      * @return The quality for the object
      */
-    double getQuality(LayoutObject layoutObject)
+    public double getQuality(LayoutObject layoutObject)
     {
         Objects.requireNonNull(layoutObject, "The layoutObject is null");
         Double quality = qualities.get(layoutObject);
@@ -159,7 +159,7 @@ public class QualityData
      * 
      * @return The quality value
      */
-    double getMin()
+    public double getMin()
     {
         if (statistics == null)
         {
@@ -173,7 +173,7 @@ public class QualityData
      * 
      * @return The quality value
      */
-    double getMax()
+    public double getMax()
     {
         if (statistics == null)
         {
@@ -187,7 +187,7 @@ public class QualityData
      * 
      * @return The quality value
      */
-    double getAverage()
+    public double getAverage()
     {
         if (statistics == null)
         {
