@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import de.javagl.layoutanalyzer.layout.LayoutObject;
+
 /**
  * The data that is computed by an {@link Aspect}, for a given set of
  * {@link LayoutObject}s, and which affects the layout process.<br>

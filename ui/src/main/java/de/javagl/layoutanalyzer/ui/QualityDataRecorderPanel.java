@@ -87,7 +87,7 @@ public class QualityDataRecorderPanel extends JPanel {
     add(functionPanel);
   }
 
-  private void setDisplayedWorldArea(Rectangle2D area) {
+  public void setDisplayedWorldArea(Rectangle2D area) {
     functionPanel.setDisplayedWorldArea(area);
   }
 

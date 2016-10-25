@@ -30,7 +30,7 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
  * Methods to create {@link QualityData} data instances

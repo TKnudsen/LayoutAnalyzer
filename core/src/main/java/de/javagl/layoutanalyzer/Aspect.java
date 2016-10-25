@@ -28,6 +28,7 @@ package de.javagl.layoutanalyzer;
 
 import java.util.List;
 
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.quality.QualityData;
 
 /**

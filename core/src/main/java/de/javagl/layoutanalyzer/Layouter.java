@@ -33,6 +33,7 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import de.javagl.geom.Points;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.quality.QualityData;
 
 /**

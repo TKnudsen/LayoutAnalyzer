@@ -37,7 +37,7 @@ import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.Disjoins;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
  * Implementation of an {@link Aspect} that tries to avoid pairwise overlaps

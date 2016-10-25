@@ -9,10 +9,10 @@ import java.util.Objects;
 
 import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
- * @author Christian Ritter, Jürgen Bernard
+ * @author Christian Ritter, Jï¿½rgen Bernard
  */
 public class PairwiseDistanceBasedRepulsionForce extends AbstractAspect {
 

@@ -34,7 +34,7 @@ import java.awt.geom.Rectangle2D;
 /**
  * An object that takes part in a layout
  */
-public class LayoutObject {
+public class LayoutObjectAlt {
 	/**
 	 * The label of this object
 	 */
@@ -76,7 +76,7 @@ public class LayoutObject {
 	 * @param label
 	 *            The label
 	 */
-	public LayoutObject(String label) {
+	public LayoutObjectAlt(String label) {
 		this.label = label;
 		this.position = new Point2D.Double();
 		this.velocity = new Point2D.Double();

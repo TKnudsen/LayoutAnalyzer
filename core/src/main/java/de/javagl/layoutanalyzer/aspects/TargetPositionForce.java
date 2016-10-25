@@ -37,7 +37,7 @@ import java.util.Objects;
 import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
  * Implementation of an {@link Aspect} that tries to keep the

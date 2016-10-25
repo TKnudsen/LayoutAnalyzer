@@ -47,8 +47,8 @@ import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.Layout;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
 import de.javagl.layoutanalyzer.LayouterData;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.utils.Colors;
 
 /**

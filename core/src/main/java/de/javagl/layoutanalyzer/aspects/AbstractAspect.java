@@ -30,7 +30,7 @@ import java.util.List;
 
 import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.quality.QualityData;
 import de.javagl.layoutanalyzer.quality.QualityDatas;
 

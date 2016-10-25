@@ -10,7 +10,7 @@ import java.util.Objects;
 
 import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
  * @author Christian Ritter

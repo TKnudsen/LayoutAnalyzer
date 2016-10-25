@@ -29,6 +29,9 @@ package de.javagl.layoutanalyzer;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
+import de.javagl.layoutanalyzer.layout.BaseLayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
+
 /**
  * Methods to initialize {@link Layout}s with sets of {@link LayoutObject}s for
  * testing
@@ -43,23 +46,23 @@ public class Layouts {
 	 */
 	static void initSimpleTestData(Layout layout) {
 		int n = 0;
-		LayoutObject p0 = new LayoutObject(String.valueOf(n++));
+		LayoutObject p0 = new BaseLayoutObject(String.valueOf(n++));
 		p0.setPosition(250, 250);
 		p0.setShape(new Rectangle2D.Double(-75, -75, 150, 150));
 
-		LayoutObject p1 = new LayoutObject(String.valueOf(n++));
+		LayoutObject p1 = new BaseLayoutObject(String.valueOf(n++));
 		p1.setPosition(350, 250);
 		p1.setShape(new Rectangle2D.Double(-75, -75, 150, 150));
 
-		LayoutObject p2 = new LayoutObject(String.valueOf(n++));
+		LayoutObject p2 = new BaseLayoutObject(String.valueOf(n++));
 		p2.setPosition(250, 350);
 		p2.setShape(new Rectangle2D.Double(-75, -75, 150, 150));
 
-		LayoutObject p3 = new LayoutObject(String.valueOf(n++));
+		LayoutObject p3 = new BaseLayoutObject(String.valueOf(n++));
 		p3.setPosition(350, 350);
 		p3.setShape(new Rectangle2D.Double(-100, -100, 200, 200));
 
-		LayoutObject p4 = new LayoutObject(String.valueOf(n++));
+		LayoutObject p4 = new BaseLayoutObject(String.valueOf(n++));
 		p4.setPosition(450, 350);
 		p4.setShape(new Rectangle2D.Double(-75, -75, 150, 150));
 
@@ -105,7 +108,7 @@ public class Layouts {
 		double maxSizeY = 0.15;
 		Random random = new Random(0);
 		for (int i = 0; i < numObjects; i++) {
-			LayoutObject p = new LayoutObject(String.valueOf(i));
+			LayoutObject p = new BaseLayoutObject(String.valueOf(i));
 			double x = random(random, minX, maxY);
 			double y = random(random, minY, maxY);
 			p.setPosition(x, y);

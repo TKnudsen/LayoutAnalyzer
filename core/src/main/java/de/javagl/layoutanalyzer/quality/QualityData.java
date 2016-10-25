@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.javagl.layoutanalyzer.Aspect;
-import de.javagl.layoutanalyzer.LayoutObject;
+import de.javagl.layoutanalyzer.layout.LayoutObject;
 
 /**
  * A class that stores an abstract "quality" value for a set of
