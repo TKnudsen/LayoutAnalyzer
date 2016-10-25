@@ -24,7 +24,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer;
+package de.javagl.layoutanalyzer.utils;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;

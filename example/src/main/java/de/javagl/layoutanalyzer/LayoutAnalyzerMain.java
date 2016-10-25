@@ -40,6 +40,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.aspects.PairwiseRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsBorderRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsRepulsionForce;

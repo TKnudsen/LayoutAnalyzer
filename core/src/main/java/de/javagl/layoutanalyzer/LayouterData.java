@@ -32,6 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.quality.QualityData;
 
 /**

@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Objects;
 
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.LayoutData;
 import de.javagl.layoutanalyzer.layout.LayoutObject;
 

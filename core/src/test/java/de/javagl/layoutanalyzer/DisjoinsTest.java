@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import de.javagl.layoutanalyzer.Disjoins;
+import de.javagl.layoutanalyzer.utils.Disjoins;
 
 public class DisjoinsTest
 {

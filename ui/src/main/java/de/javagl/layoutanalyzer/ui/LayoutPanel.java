@@ -44,10 +44,10 @@ import javax.swing.JPanel;
 import de.javagl.geom.ArrowCreator;
 import de.javagl.geom.Arrows;
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.Layout;
 import de.javagl.layoutanalyzer.LayoutData;
 import de.javagl.layoutanalyzer.LayouterData;
+import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.utils.Colors;
 

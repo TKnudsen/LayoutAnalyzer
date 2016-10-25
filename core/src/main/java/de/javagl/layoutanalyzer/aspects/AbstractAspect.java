@@ -26,9 +26,9 @@
  */
 package de.javagl.layoutanalyzer.aspects;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import de.javagl.layoutanalyzer.Aspect;
 import de.javagl.layoutanalyzer.LayoutData;
 import de.javagl.layoutanalyzer.layout.LayoutObject;
 import de.javagl.layoutanalyzer.quality.QualityData;
@@ -38,51 +38,71 @@ import de.javagl.layoutanalyzer.quality.QualityDatas;
  * Abstract base implementation of an {@link Aspect}
  */
 abstract public class AbstractAspect implements Aspect {
-	/**
-	 * The name of this aspect.
-	 */
-	private final String name;
+  /**
+   * The name of this aspect.
+   */
+  private final String name;
 
-	/**
-	 * The weight of this aspect
-	 */
-	private double weight;
+  /**
+   * The weight of this aspect
+   */
+  private double weight;
 
-	/**
-	 * Default constructor
-	 * 
-	 * @param name
-	 *            The name of this aspect
-	 */
-	protected AbstractAspect(String name) {
-		this.name = name;
-		this.weight = 1.0;
-	}
+  /**
+   * The Listners of this Aspect
+   */
+  private final List<AspectListener> listeners = new ArrayList<AspectListener>();
 
-	@Override
-	public final String getName() {
-		return name;
-	}
+  /**
+   * Default constructor
+   * 
+   * @param name
+   *          The name of this aspect
+   */
+  protected AbstractAspect(String name) {
+    this.name = name;
+    this.weight = 1.0;
+  }
 
-	@Override
-	public final double getWeight() {
-		return weight;
-	}
+  @Override
+  public final String getName() {
+    return name;
+  }
 
-	@Override
-	public final void setWeight(double weight) {
-		this.weight = Math.min(1.0, Math.max(0.0, weight));
-	}
+  @Override
+  public final double getWeight() {
+    return weight;
+  }
 
-	@Override
-	public QualityData computeQualityData(List<? extends LayoutObject> layoutObjects, LayoutData layoutDataHint) {
-		LayoutData layoutData = layoutDataHint;
-		if (layoutData == null) {
-			layoutData = computeLayoutData(layoutObjects);
-		}
-		// XXX TODO Avoid these VERY magic constants ASAP !!!
-		QualityData qualityData = QualityDatas.computeFromForceLengths(layoutData, 0.0, 500.0);
-		return qualityData;
-	}
+  @Override
+  public final void setWeight(double weight) {
+    this.weight = Math.min(1.0, Math.max(0.0, weight));
+  }
 
+  @Override
+  public QualityData computeQualityData(List<? extends LayoutObject> layoutObjects,
+      LayoutData layoutDataHint) {
+    LayoutData layoutData = layoutDataHint;
+    if (layoutData == null) {
+      layoutData = computeLayoutData(layoutObjects);
+    }
+    // XXX TODO Avoid these VERY magic constants ASAP !!!
+    QualityData qualityData = QualityDatas.computeFromForceLengths(layoutData, 0.0, 500.0);
+    return qualityData;
+  }
+
+  protected void fireListener() {
+    for (AspectListener listener : listeners)
+      listener.changedWeight(this);
+  }
+
+  @Override
+  public void addListener(AspectListener listener) {
+    listeners.add(listener);
+  }
+
+  @Override
+  public void removeListener(AspectListener listener) {
+    listeners.remove(listener);
+  }
 }
