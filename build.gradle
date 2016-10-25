@@ -3,8 +3,7 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'maven'
 
-    // TODO change to real group
-    group = 'layoutanaylyzer'
+    group = 'de.javagl.LayoutAnalyzer'
     version '0.1-SNAPSHOT'
 
     repositories {
