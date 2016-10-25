@@ -33,122 +33,117 @@ import java.awt.geom.Point2D;
  */
 public class BaseLayoutObject implements LayoutObject {
 
-	private String label;
-	private final Point2D position = new Point2D.Double();
-	private final Point2D velocity = new Point2D.Double();
-	private final Point2D acceleration = new Point2D.Double();
-	private final Point2D force = new Point2D.Double();
-	private double mass = 1.0;
-	private Shape shape;
+  private String label;
+  private final Point2D position = new Point2D.Double();
+  private final Point2D velocity = new Point2D.Double();
+  private final Point2D acceleration = new Point2D.Double();
+  private final Point2D force = new Point2D.Double();
+  private double mass = 1.0;
+  private Shape shape;
 
-	/**
-	 * Creates a new object with the given label
-	 */
-	public BaseLayoutObject() {
-		this.label = "";
-	}
+  /**
+   * Creates a new object with the given label
+   */
+  public BaseLayoutObject() {
+    this.label = "";
+  }
 
-	/**
-	 * Creates a new object with the given label
-	 * 
-	 * @param label
-	 *            The label
-	 */
-	public BaseLayoutObject(String label) {
-		this.label = label;
-	}
+  /**
+   * Creates a new object with the given label
+   * 
+   * @param label
+   *          The label
+   */
+  public BaseLayoutObject(String label) {
+    this.label = label;
+  }
 
-	@Override
-	public String getLabel() {
-		return label;
-	}
+  @Override
+  public String getLabel() {
+    return label;
+  }
 
-	@Override
-	public void setLabel(String label) {
-		this.label = label;
-	}
+  @Override
+  public void setLabel(String label) {
+    this.label = label;
+  }
 
-	@Override
-	public void setPosition(Point2D position) {
-		this.position.setLocation(position);
-	}
+  @Override
+  public void setPosition(Point2D position) {
+    this.position.setLocation(position);
+  }
 
-	public void setPosition(double x, double y) {
-		this.position.setLocation(x, y);
-	}
+  public void setPosition(double x, double y) {
+    this.position.setLocation(x, y);
+  }
 
-	@Override
-	public Point2D getPosition() {
-		return new Point2D.Double(position.getX(), position.getY());
-	}
+  @Override
+  public Point2D getPosition() {
+    return new Point2D.Double(position.getX(), position.getY());
+  }
 
-	@Override
-	public double distanceTo(LayoutObject other) {
-		return getPosition().distance(other.getPosition());
-	}
+  @Override
+  public void setVelocity(Point2D velocity) {
+    this.velocity.setLocation(velocity);
+  }
 
-	@Override
-	public void setVelocity(Point2D velocity) {
-		this.velocity.setLocation(velocity);
-	}
+  @Override
+  public void setVelocity(double x, double y) {
+    this.velocity.setLocation(x, y);
+  }
 
-	@Override
-	public void setVelocity(double x, double y) {
-		this.velocity.setLocation(x, y);
-	}
+  @Override
+  public Point2D getVelocity() {
+    return new Point2D.Double(velocity.getX(), velocity.getY());
+  }
 
-	@Override
-	public Point2D getVelocity() {
-		return new Point2D.Double(velocity.getX(), velocity.getY());
-	}
+  @Override
+  public void setAcceleration(Point2D acceleration) {
+    this.acceleration.setLocation(acceleration);
+  }
 
-	@Override
-	public void setAcceleration(Point2D acceleration) {
-		this.acceleration.setLocation(acceleration);
-	}
+  @Override
+  public void setAcceleration(double x, double y) {
+    this.acceleration.setLocation(x, y);
+  }
 
-	@Override
-	public void setAcceleration(double x, double y) {
-		this.acceleration.setLocation(x, y);
-	}
+  @Override
+  public Point2D getAcceleration() {
+    return new Point2D.Double(acceleration.getX(), acceleration.getY());
+  }
 
-	@Override
-	public Point2D getAcceleration() {
-		return new Point2D.Double(acceleration.getX(), acceleration.getY());
-	}
+  @Override
+  public void setForce(Point2D force) {
+    this.force.setLocation(force);
+  }
 
-	@Override
-	public void setForce(Point2D force) {
-		this.force.setLocation(force);
-	}
+  @Override
+  public void setForce(double x, double y) {
+    this.force.setLocation(x, y);
+  }
 
-	@Override
-	public void setForce(double x, double y) {
-		this.force.setLocation(x, y);
-	}
+  @Override
+  public Point2D getForce() {
+    return new Point2D.Double(force.getX(), force.getY());
+  }
 
-	@Override
-	public Point2D getForce() {
-		return new Point2D.Double(force.getX(), force.getY());
-	}
+  @Override
+  public double getMass() {
+    return mass;
+  }
 
-	@Override
-	public double getMass() {
-		return mass;
-	}
+  @Override
+  public void setMass(double mass) {
+    this.mass = mass;
+  }
 
-	@Override
-	public void setMass(double mass) {
-		this.mass = mass;
-	}
+  @Override
+  public Shape getShape() {
+    return shape;
+  }
 
-	@Override
-	public Shape getShape() {
-		return shape;
-	}
-
-	@Override
-	public void setShape(Shape shape) {
-		this.shape = shape;
-	}
+  @Override
+  public void setShape(Shape shape) {
+    this.shape = shape;
+  }
 }

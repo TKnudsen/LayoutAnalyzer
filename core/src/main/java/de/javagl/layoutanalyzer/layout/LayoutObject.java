@@ -72,14 +72,6 @@ public interface LayoutObject {
    */
   public Point2D getPosition();
 
-  /**
-   * Returns the 2Dim-distance of this object to the other object
-   * 
-   * @param other
-   *          The other object
-   * @return The 2Dim-distance
-   */
-  public double distanceTo(LayoutObject other);
 
   /**
    * Set the velocity of this object to be the same as the given velocity
