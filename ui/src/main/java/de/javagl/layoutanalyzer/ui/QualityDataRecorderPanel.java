@@ -35,7 +35,7 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
-import de.javagl.layoutanalyzer.quality.QualityDataRecorder;
+import de.javagl.layoutanalyzer.QualityDataRecorder;
 import de.javagl.layoutanalyzer.utils.Colors;
 import de.javagl.viewer.MouseControl;
 import de.javagl.viewer.functions.FunctionPanel;

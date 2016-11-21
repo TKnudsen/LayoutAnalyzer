@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Objects;
 
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 import de.javagl.layoutanalyzer.utils.Disjoins;
 
 /**
@@ -56,9 +56,9 @@ public class ShapeBoundsRepulsionForce extends AbstractAspect implements Aspect 
 	}
 
 	@Override
-	public LayoutData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
+	public AspectData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
 		Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
-		LayoutData layoutData = new LayoutData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
+		AspectData layoutData = new AspectData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
 		for (int i = 0; i < layoutObjects.size(); i++) {
 			for (int j = i + 1; j < layoutObjects.size(); j++) {
 				LayoutObject layoutObject0 = layoutObjects.get(i);
@@ -71,16 +71,16 @@ public class ShapeBoundsRepulsionForce extends AbstractAspect implements Aspect 
 
 	/**
 	 * Compute the force that is implied by this aspect, for the given
-	 * {@link LayoutObject}s, and store it in the given {@link LayoutData}
+	 * {@link LayoutObject}s, and store it in the given {@link AspectData}
 	 * 
 	 * @param layoutData
-	 *            The {@link LayoutData}
+	 *            The {@link AspectData}
 	 * @param layoutObject0
 	 *            The first {@link LayoutObject}
 	 * @param layoutObject1
 	 *            The second {@link LayoutObject}
 	 */
-	private void computeForce(LayoutData layoutData, LayoutObject layoutObject0, LayoutObject layoutObject1) {
+	private void computeForce(AspectData layoutData, LayoutObject layoutObject0, LayoutObject layoutObject1) {
 
 		Rectangle2D bounds0 = layoutObject0.getShapeBounds();
 		Rectangle2D bounds1 = layoutObject1.getShapeBounds();

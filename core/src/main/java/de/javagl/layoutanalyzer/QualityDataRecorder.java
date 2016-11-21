@@ -24,7 +24,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.quality;
+package de.javagl.layoutanalyzer;
 
 import java.util.Objects;
 import java.util.function.DoubleFunction;

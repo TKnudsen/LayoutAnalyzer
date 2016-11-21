@@ -29,8 +29,8 @@ package de.javagl.layoutanalyzer;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
-import de.javagl.layoutanalyzer.layout.BaseLayoutObject;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.BaseLayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * Methods to initialize {@link Layout}s with sets of {@link LayoutObject}s for

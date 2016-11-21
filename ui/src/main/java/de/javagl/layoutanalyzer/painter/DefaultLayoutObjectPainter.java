@@ -5,8 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
+/**
+ * Paints gray square (32x32 pixel) for every Layout Object 
+ */
 public class DefaultLayoutObjectPainter<T extends LayoutObject> implements LayoutObjectPainter<T> {
 
   @Override

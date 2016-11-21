@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * A layout is a collection of {@link LayoutObject}s

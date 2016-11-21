@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.javagl.layoutanalyzer.aspects.Aspect;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * The data that is computed by an {@link Aspect}, for a given set of
@@ -42,7 +42,7 @@ import de.javagl.layoutanalyzer.layout.LayoutObject;
  * Currently, this only consists of <i>forces</i> that may be applied to the
  * layout objects during the simulation in the {@link Layouter}.
  */
-public class LayoutData {
+public class AspectData {
 	/**
 	 * The list of {@link LayoutObject}s for which this data was computed
 	 */
@@ -71,7 +71,7 @@ public class LayoutData {
 	 * @param weight
 	 *            The weight that was set in the {@link Aspect}
 	 */
-	public LayoutData(List<LayoutObject> layoutObjects, double weight) {
+	public AspectData(List<LayoutObject> layoutObjects, double weight) {
 		Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
 		this.layoutObjects = layoutObjects;
 		this.weight = weight;

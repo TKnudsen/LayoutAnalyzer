@@ -28,78 +28,48 @@ package de.javagl.layoutanalyzer.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import de.javagl.layoutanalyzer.QualityData;
 import de.javagl.layoutanalyzer.QualityDataRecorder;
 import de.javagl.layoutanalyzer.aspects.Aspect;
+import de.javagl.layoutanalyzer.quality.QualityMeasure;
 import de.javagl.layoutanalyzer.utils.Colors;
 
 /**
- * A panel containing basic control- and monitoring components for one {@link Aspect} and the
- * {@link QualityData} that is computes.
+ * A panel containing basic monitoring components for one {@link QualityMeasure}.
  */
-@Deprecated
-public class AspectPanelSmall extends JPanel {
+public class QualityDataPanel extends JPanel {
   /**
    * Serial UID
    */
-  private static final long serialVersionUID = 8535490088178983572L;
-
+  private static final long serialVersionUID = -5259190132513158779L;
   /**
-   * A counter to assign different colors to the {@link Aspect}s
+   * A counter to assign different colors to the {@link QualityMeasure}s
    */
   private static int aspectColorCounter = 0;
 
-  /**
-   * The {@link Aspect} that this panel operates on
-   */
-  private final Aspect aspect;
 
   /**
-   * Creates a new panel that allows controlling the given {@link Aspect}, and shows the contents of
+   * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the contents of
    * the given {@link QualityDataRecorder}
    * 
-   * @param aspect
+   * @param qualityMeasure
    *          The {@link Aspect}
    * @param qualityDataRecorder
    *          The {@link QualityDataRecorder}
    */
-  public AspectPanelSmall(Aspect aspect) {
+  public QualityDataPanel(QualityMeasure qualityMeasure, QualityDataRecorder qualityDataRecorder) {
     super(new BorderLayout());
-    this.aspect = aspect;
-
-    TitledBorder titledBorder = new TitledBorder(aspect.getName());
+    TitledBorder titledBorder = new TitledBorder(qualityMeasure.getName());
     Color color = Colors.getColor(aspectColorCounter++);
     titledBorder.setTitleColor(color);
     setBorder(titledBorder);
 
-    JPanel controlPanel = createControlPanel();
-    add(controlPanel, BorderLayout.CENTER);
+    QualityDataRecorderPanel qualityDataRecorderPanel = new QualityDataRecorderPanel(color,
+        qualityDataRecorder);
+    add(qualityDataRecorderPanel, BorderLayout.CENTER);
   }
 
-  /**
-   * Create the control panel containing the GUI components for controlling the {@link Aspect}
-   * 
-   * @return The control panel
-   */
-  private JPanel createControlPanel() {
-    JPanel controlPanel = new JPanel(new GridLayout(1, 0));
-    JSlider slider = new JSlider(0, 100, 0);
-    slider.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        double weight = slider.getValue() / 100.0;
-        aspect.setWeight(weight);
-      }
-    });
-    controlPanel.add(slider);
-    return controlPanel;
-  }
 }

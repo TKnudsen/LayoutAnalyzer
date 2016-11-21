@@ -23,24 +23,42 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.layout;
+package de.javagl.layoutanalyzer.objects;
 
+/**
+ * An {@link BaseLayoutObject} with data attached to it.
+ * 
+ * @param <T>
+ *          The type of data this layout object contains
+ */
 public class RealWorldLayoutObject<T> extends BaseLayoutObject {
 
-	private T data;
+  /**
+   * The data attached to this Layout Object (can be null);
+   */
+  private T data;
 
-	public RealWorldLayoutObject() {
-	}
+  /**
+   * Default constructor
+   * 
+   * {@link #data} is set to null
+   */
+  public RealWorldLayoutObject() {
+  }
 
-	public RealWorldLayoutObject(T data) {
-		this.data = data;
-	}
+  /**
+   * @param data
+   *          value of {@link #data}, can be null
+   */
+  public RealWorldLayoutObject(T data) {
+    this.data = data;
+  }
 
-	public T getData() {
-		return data;
-	}
+  public T getData() {
+    return data;
+  }
 
-	public void setData(T data) {
-		this.data = data;
-	}
+  public void setData(T data) {
+    this.data = data;
+  }
 }

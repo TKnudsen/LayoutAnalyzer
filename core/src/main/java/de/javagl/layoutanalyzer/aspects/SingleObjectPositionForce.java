@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * @author Christian Ritter
@@ -37,9 +37,9 @@ public class SingleObjectPositionForce extends AbstractAspect {
     }
 
     @Override
-    public LayoutData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
+    public AspectData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
         Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
-        LayoutData layoutData = new LayoutData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)),
+        AspectData layoutData = new AspectData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)),
                 getWeight());
         for (int i = 0; i < layoutObjects.size(); i++) {
             LayoutObject lo = layoutObjects.get(i);

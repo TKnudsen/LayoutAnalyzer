@@ -45,15 +45,15 @@ import de.javagl.geom.ArrowCreator;
 import de.javagl.geom.Arrows;
 import de.javagl.geom.Points;
 import de.javagl.layoutanalyzer.Layout;
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.LayouterData;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.LayoutAspects;
 import de.javagl.layoutanalyzer.aspects.Aspect;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 import de.javagl.layoutanalyzer.utils.Colors;
 
 /**
  * A panel that shows a {@link Layout} consisting of {@link LayoutObject}s, and
- * optionally visualizes {@link LayoutData}
+ * optionally visualizes {@link AspectData}
  */
 public class LayoutPanel extends JPanel {
 	/**
@@ -74,9 +74,9 @@ public class LayoutPanel extends JPanel {
 	private final Layout layout;
 
 	/**
-	 * The optional {@link LayouterData} that may be shown in this panel
+	 * The optional {@link LayoutAspects} that may be shown in this panel
 	 */
-	private LayouterData layouterData;
+	private LayoutAspects layouterData;
 
 	/**
 	 * Whether the forces of any given {@link LayoutObject} are painted.
@@ -100,13 +100,13 @@ public class LayoutPanel extends JPanel {
 	}
 
 	/**
-	 * Set the {@link LayouterData} that should be shown in this panel. If this
-	 * is <code>null</code>, then no {@link LayouterData} will be shown.
+	 * Set the {@link LayoutAspects} that should be shown in this panel. If this
+	 * is <code>null</code>, then no {@link LayoutAspects} will be shown.
 	 * 
 	 * @param layouterData
-	 *            The {@link LayouterData}
+	 *            The {@link LayoutAspects}
 	 */
-	public void setLayouterData(LayouterData layouterData) {
+	public void setLayouterData(LayoutAspects layouterData) {
 		this.layouterData = layouterData;
 		repaint();
 	}
@@ -192,7 +192,7 @@ public class LayoutPanel extends JPanel {
 	}
 
 	/**
-	 * Paint the current {@link LayouterData}, if it is not <code>null</code>,
+	 * Paint the current {@link LayoutAspects}, if it is not <code>null</code>,
 	 * into the given graphics
 	 * 
 	 * @param g
@@ -212,7 +212,7 @@ public class LayoutPanel extends JPanel {
 			
 			int n = 0;
 			for (Aspect aspect : layouterData.getAspects()) {
-				LayoutData layoutData = layouterData.getLayoutData(aspect);
+				AspectData layoutData = layouterData.getLayoutData(aspect);
 
 				g.setColor(Colors.getColorWithAlpha(n, 0.25));
 

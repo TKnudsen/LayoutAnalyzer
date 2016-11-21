@@ -35,8 +35,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * Implementation of an {@link Aspect} that tries to keep the
@@ -72,9 +72,9 @@ public class TargetPositionForce extends AbstractAspect implements Aspect {
 	}
 
 	@Override
-	public LayoutData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
+	public AspectData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
 		Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
-		LayoutData layoutData = new LayoutData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
+		AspectData layoutData = new AspectData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
 		Point2D difference = new Point2D.Double();
 		Point2D direction = new Point2D.Double();
 		for (int i = 0; i < layoutObjects.size(); i++) {

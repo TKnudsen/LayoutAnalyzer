@@ -26,19 +26,17 @@
  */
 package de.javagl.layoutanalyzer;
 
+import de.javagl.layoutanalyzer.aspects.Aspect;
+
 /**
- * Interface for classes that may be added to a {@link Layouter} with 
- * {@link Layouter#addLayouterDataListener(LayouterDataListener)},
- * to be informed about the {@link LayouterData} that is computed 
- * each time {@link Layouter#performStep()} is called.
+ * Listener Interface for {@link Aspect}
  */
-public interface LayouterDataListener
-{
-    /**
-     * Will be called when the {@link Layouter} performed a step and
-     * computed the given {@link LayouterData}
-     * 
-     * @param layouterData The {@link LayouterData}
-     */
-    void layouterDataComputed(LayouterData layouterData);
+public interface AspectListener {
+  /**
+   * Invoked when the weight of an aspect is changed
+   * 
+   * @param aspect
+   *          the Aspect which weight has changed
+   */
+  public void changedWeight(Aspect aspect);
 }

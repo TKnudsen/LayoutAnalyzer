@@ -24,17 +24,21 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.aspects;
+package de.javagl.layoutanalyzer;
 
 /**
- * Listener Interface for {@link Aspect}
+ * Interface for classes that may be added to a {@link Layouter} with 
+ * {@link Layouter#addLayouterDataListener(LayouterDataListener)},
+ * to be informed about the {@link LayoutAspects} that is computed 
+ * each time {@link Layouter#performStep()} is called.
  */
-public interface AspectListener {
-  /**
-   * Invoked when the weight of an aspect is changed
-   * 
-   * @param aspect
-   *          the Aspect which weight has changed
-   */
-  public void changedWeight(Aspect aspect);
+public interface LayouterListener
+{
+    /**
+     * Will be called when the {@link Layouter} performed a step and
+     * computed the given {@link LayoutAspects}
+     * 
+     * @param layouterData The {@link LayoutAspects}
+     */
+    void layouterDataComputed(LayoutAspects layouterData);
 }

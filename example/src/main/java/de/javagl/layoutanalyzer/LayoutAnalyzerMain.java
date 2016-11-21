@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -45,8 +44,9 @@ import de.javagl.layoutanalyzer.aspects.PairwiseRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsBorderRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.TargetPositionForce;
-import de.javagl.layoutanalyzer.quality.QualityData;
-import de.javagl.layoutanalyzer.quality.QualityDataRecorder;
+import de.javagl.layoutanalyzer.quality.ForceLengthQualityMeasure;
+import de.javagl.layoutanalyzer.quality.QualityMeasure;
+import de.javagl.layoutanalyzer.ui.QualityDataPanel;
 import de.javagl.layoutanalyzer.ui.AspectPanel;
 import de.javagl.layoutanalyzer.ui.LayoutPanel;
 import de.javagl.layoutanalyzer.utils.LoggerUtil;
@@ -82,7 +82,7 @@ public class LayoutAnalyzerMain
 
         // Create the Layout and initialize it with some test data
         Layout layout = new Layout();
-		Layouts.initTestData(layout);
+        Layouts.initTestData(layout);
         
         // Create the panel that shows the layout
         int WIDTH = 1000;
@@ -99,27 +99,46 @@ public class LayoutAnalyzerMain
         aspects.add(new ShapeBoundsBorderRepulsionForce(
             new Rectangle2D.Double(0.2, 0.2, 0.6,0.6)));
         
-        // Create the control panel, containing one AspectPanel for
-        // each aspect, offering a slider for the weight, and a 
-        // panel for plotting the quality measures that are collected
+        // Create the QualityMeasures for the aspects
+        List<QualityMeasure> qualityMeasures = new ArrayList<QualityMeasure>();
+        for(Aspect a : aspects) {
+          qualityMeasures.add(new ForceLengthQualityMeasure(a));
+        }
+        
+        // Create the quality Panel, containing one QualityDataPanel for
+        // each QualityMeasure, a panel for plotting the quality measures that are collected
         // the the QualityDataRecorders
-        JPanel controlPanel = new JPanel();
-        BoxLayout boxLayout = new BoxLayout(controlPanel, BoxLayout.Y_AXIS);
-        controlPanel.setLayout(boxLayout);
-        Map<Aspect, QualityDataRecorder> qualityDataRecorders = 
-            new LinkedHashMap<Aspect, QualityDataRecorder>();
-        for (Aspect aspect : aspects)
+        JPanel qualitieMeasuresPanel = new JPanel();
+        BoxLayout qualitiesBoxLayout = new BoxLayout(qualitieMeasuresPanel, BoxLayout.Y_AXIS);
+        qualitieMeasuresPanel.setLayout(qualitiesBoxLayout);
+        Map<QualityMeasure, QualityDataRecorder> qualityDataRecorders = 
+            new LinkedHashMap<QualityMeasure, QualityDataRecorder>();
+        for (QualityMeasure qualitieMeasures : qualityMeasures)
         {
             int queueSize = 500;
             QualityDataRecorder qualityDataRecorder = 
                 new QualityDataRecorder(queueSize);
-            AspectPanel aspectPanel = 
-                new AspectPanel(aspect, qualityDataRecorder);
-            aspectPanel.setPreferredSize(new Dimension(400,250));
-            controlPanel.add(aspectPanel);
-            qualityDataRecorders.put(aspect, qualityDataRecorder);
+            QualityDataPanel qualityPanel = 
+                new QualityDataPanel(qualitieMeasures, qualityDataRecorder);
+            qualityPanel.setPreferredSize(new Dimension(400,250));
+            qualitieMeasuresPanel.add(qualityPanel);
+            qualityDataRecorders.put(qualitieMeasures, qualityDataRecorder);
         }
-        f.getContentPane().add(controlPanel, BorderLayout.EAST);
+        f.getContentPane().add(qualitieMeasuresPanel, BorderLayout.EAST);
+        
+        
+        // Create the control panel, containing one AspectPanel for
+        // each aspect, offering a slider for the weight
+        JPanel controlPanel = new JPanel();
+        BoxLayout boxLayout = new BoxLayout(controlPanel, BoxLayout.Y_AXIS);
+        controlPanel.setLayout(boxLayout);
+        for (Aspect aspect : aspects)
+        {
+            AspectPanel aspectPanel = new AspectPanel(aspect);
+            controlPanel.add(aspectPanel);
+        }
+        f.getContentPane().add(controlPanel, BorderLayout.WEST);
+        
         
         // Create the Layouter and add all aspects to it
         Layouter layouter = new Layouter(layout);
@@ -133,21 +152,22 @@ public class LayoutAnalyzerMain
         // so that the LayoutData (i.e. the force arrows) may be
         // painted, and and pass the contained QualityData to the 
         // control panel for plotting the quality measures
-        LayouterDataListener layouterDataListener = new LayouterDataListener()
+        LayouterListener layouterDataListener = new LayouterListener()
         {
             @Override
-            public void layouterDataComputed(LayouterData layouterData)
+            public void layouterDataComputed(LayoutAspects layoutForces)
             {
-                layoutPanel.setLayouterData(layouterData);
-                Set<Aspect> aspects = layouterData.getAspects();
-                for (Aspect aspect : aspects)
+                LayoutQualities qualities = new LayoutQualities(qualityMeasures, layout.getLayoutObjects(), layoutForces);
+                layoutPanel.setLayouterData(layoutForces);
+                for (QualityMeasure qualitiesMeasure : qualities.getQualityMeasures())
                 {
-                    QualityData qualityData = 
-                        layouterData.getQualityData(aspect);
+                    QualityData qualityData = qualities.getQualityData(qualitiesMeasure);
+                        
                     QualityDataRecorder qualityDataRecorder =
-                        qualityDataRecorders.get(aspect);
+                        qualityDataRecorders.get(qualitiesMeasure);
                     qualityDataRecorder.record(qualityData);
                 }
+                qualitieMeasuresPanel.repaint();
                 controlPanel.repaint();
             }
         };

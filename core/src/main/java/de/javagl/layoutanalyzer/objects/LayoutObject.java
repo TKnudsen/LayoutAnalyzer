@@ -23,13 +23,16 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.layout;
+package de.javagl.layoutanalyzer.objects;
 
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * An object that takes part in a layout
+ */
 public interface LayoutObject {
 
   /**

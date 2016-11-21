@@ -34,8 +34,8 @@ import java.util.List;
 import java.util.Objects;
 
 import de.javagl.geom.Points;
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * Implementation of an {@link Aspect} that tries to avoid overlaps between the
@@ -77,9 +77,9 @@ public class ShapeBoundsBorderRepulsionForce extends AbstractAspect implements A
 	}
 
 	@Override
-	public LayoutData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
+	public AspectData computeLayoutData(List<? extends LayoutObject> layoutObjects) {
 		Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
-		LayoutData layoutData = new LayoutData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
+		AspectData layoutData = new AspectData(Collections.unmodifiableList(new ArrayList<LayoutObject>(layoutObjects)), getWeight());
 		for (int i = 0; i < layoutObjects.size(); i++) {
 			LayoutObject layoutObject = layoutObjects.get(i);
 			computeForce(layoutData, layoutObject);
@@ -90,14 +90,14 @@ public class ShapeBoundsBorderRepulsionForce extends AbstractAspect implements A
 	/**
 	 * Compute the force that is implied by the current position and shape of
 	 * the given {@link LayoutObject}, and store it in the given
-	 * {@link LayoutData}
+	 * {@link AspectData}
 	 * 
 	 * @param layoutData
-	 *            The {@link LayoutData}
+	 *            The {@link AspectData}
 	 * @param layoutObject
 	 *            The {@link LayoutObject}
 	 */
-	private void computeForce(LayoutData layoutData, LayoutObject layoutObject) {
+	private void computeForce(AspectData layoutData, LayoutObject layoutObject) {
 		Rectangle2D bounds = layoutObject.getShapeBounds();
 
 		double dx = 0;

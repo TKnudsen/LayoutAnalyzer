@@ -24,7 +24,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.quality;
+package de.javagl.layoutanalyzer;
 
 import java.util.DoubleSummaryStatistics;
 import java.util.LinkedHashMap;
@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import de.javagl.layoutanalyzer.aspects.Aspect;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * A class that stores an abstract "quality" value for a set of
@@ -55,14 +55,6 @@ public class QualityData
     private final List<? extends LayoutObject> layoutObjects;
     
     /**
-     * The weight which was set for the {@link Aspect} when this data was 
-     * computed. 
-     * 
-     * @see Aspect#setWeight(double)
-     */
-    private final double weight;
-    
-    /**
      * The mapping from {@link LayoutObject}s to quality values.
      */
     private final Map<LayoutObject, Double> qualities;
@@ -78,25 +70,11 @@ public class QualityData
      * after it has been passed to this constructor.
      * 
      * @param layoutObjects The {@link LayoutObject}s 
-     * @param weight The weight that was set in the {@link Aspect}
      */
-    public QualityData(List<? extends LayoutObject> layoutObjects, double weight)
+    public QualityData(List<? extends LayoutObject> layoutObjects)
     {
         this.layoutObjects = layoutObjects;
-        this.weight = weight;
         this.qualities = new LinkedHashMap<LayoutObject, Double>();
-    }
-    
-    /**
-     * Returns the weight that was set in the {@link Aspect} when this
-     * data was computed.
-     * 
-     * @return The weight
-     * @see Aspect#setWeight(double)
-     */
-    double getWeight()
-    {
-        return weight;
     }
     
     /**

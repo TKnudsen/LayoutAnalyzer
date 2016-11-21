@@ -23,13 +23,15 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.layout;
+package de.javagl.layoutanalyzer.objects;
 
 import java.awt.Shape;
 import java.awt.geom.Point2D;
 
 /**
- * An object that takes part in a layout
+ * An {@link LayoutObject} with default configuration.
+ * 
+ * Every parameter of the object is reachable by the outsite world via getter and setter methods.
  */
 public class BaseLayoutObject implements LayoutObject {
 
@@ -42,7 +44,7 @@ public class BaseLayoutObject implements LayoutObject {
   private Shape shape;
 
   /**
-   * Creates a new object with the given label
+   * Creates a new object an empty label
    */
   public BaseLayoutObject() {
     this.label = "";

@@ -24,39 +24,40 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.javagl.layoutanalyzer.quality;
+package de.javagl.layoutanalyzer.utils;
 
 import java.awt.geom.Point2D;
 import java.util.List;
 
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
+import de.javagl.layoutanalyzer.AspectData;
+import de.javagl.layoutanalyzer.QualityData;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
  * Methods to create {@link QualityData} data instances
  */
 public class QualityDatas {
 	/**
-	 * Compute a {@link QualityData} from the given {@link LayoutData}, where
+	 * Compute a {@link QualityData} from the given {@link AspectData}, where
 	 * the quality values directly correspond to the given minimum and maximum
 	 * force lengths: When the length of the
-	 * {@link LayoutData#getForce(LayoutObject) force} for a certain
+	 * {@link AspectData#getForce(LayoutObject) force} for a certain
 	 * {@link LayoutObject} is smaller than or equal to the given minimum
 	 * length, then the quality will be 1.0. When the length of the
-	 * {@link LayoutData#getForce(LayoutObject) force} for a certain
+	 * {@link AspectData#getForce(LayoutObject) force} for a certain
 	 * {@link LayoutObject} is greater than or equal to the given maximum
 	 * length, then the quality will be 0.0.
 	 * 
 	 * @param layoutData
-	 *            The {@link LayoutData}
+	 *            The {@link AspectData}
 	 * @param minForceLength
 	 *            The minimum force length
 	 * @param maxForceLength
 	 *            The maximum force length
 	 * @return The {@link QualityData}
 	 */
-	public static QualityData computeFromForceLengths(LayoutData layoutData, double minForceLength, double maxForceLength) {
-		QualityData qualityData = new QualityData(layoutData.getLayoutObjects(), layoutData.getWeight());
+	public static QualityData computeFromForceLengths(AspectData layoutData, double minForceLength, double maxForceLength) {
+		QualityData qualityData = new QualityData(layoutData.getLayoutObjects());
 		List<LayoutObject> layoutObjects = layoutData.getLayoutObjects();
 		double invDelta = 1.0 / (maxForceLength - minForceLength);
 		for (LayoutObject layoutObject : layoutObjects) {

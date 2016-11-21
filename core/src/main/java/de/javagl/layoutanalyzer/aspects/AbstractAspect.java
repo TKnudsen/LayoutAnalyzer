@@ -29,10 +29,7 @@ package de.javagl.layoutanalyzer.aspects;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.javagl.layoutanalyzer.LayoutData;
-import de.javagl.layoutanalyzer.layout.LayoutObject;
-import de.javagl.layoutanalyzer.quality.QualityData;
-import de.javagl.layoutanalyzer.quality.QualityDatas;
+import de.javagl.layoutanalyzer.AspectListener;
 
 /**
  * Abstract base implementation of an {@link Aspect}
@@ -77,18 +74,6 @@ abstract public class AbstractAspect implements Aspect {
   @Override
   public final void setWeight(double weight) {
     this.weight = Math.min(1.0, Math.max(0.0, weight));
-  }
-
-  @Override
-  public QualityData computeQualityData(List<? extends LayoutObject> layoutObjects,
-      LayoutData layoutDataHint) {
-    LayoutData layoutData = layoutDataHint;
-    if (layoutData == null) {
-      layoutData = computeLayoutData(layoutObjects);
-    }
-    // XXX TODO Avoid these VERY magic constants ASAP !!!
-    QualityData qualityData = QualityDatas.computeFromForceLengths(layoutData, 0.0, 500.0);
-    return qualityData;
   }
 
   protected void fireListener() {
