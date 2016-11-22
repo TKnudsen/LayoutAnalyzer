@@ -45,7 +45,7 @@ public class ForceLengthQualityMeasure implements QualityMeasure {
   public QualityData computeQualityData(List<? extends LayoutObject> layoutObjects,
       LayoutAspects layoutForcesHint) {
     LayoutAspects forceData = layoutForcesHint;
-    if (forceData == null) {
+    if (forceData == null || forceData.getLayoutData(forceAspect) == null) {
       AspectData layoutData = forceAspect.computeLayoutData(layoutObjects);
       forceData = new LayoutAspects();
       forceData.add(forceAspect, layoutData);
