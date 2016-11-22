@@ -26,10 +26,10 @@
  */
 package de.javagl.layoutanalyzer;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import de.javagl.layoutanalyzer.objects.LayoutObject;
 
@@ -45,7 +45,7 @@ public class Layout<T extends LayoutObject> {
 	 * Creates a new, empty layout
 	 */
 	public Layout() {
-		this.layoutObjects = new ArrayList<T>(); // CopyOnWriteArrayList ???
+		this.layoutObjects = new CopyOnWriteArrayList<T>(); // CopyOnWriteArrayList ???
 	}
 
 	/**
