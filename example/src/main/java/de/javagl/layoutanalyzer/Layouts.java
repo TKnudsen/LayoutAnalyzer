@@ -44,7 +44,7 @@ public class Layouts {
 	 * @param layout
 	 *            The {@link Layout}
 	 */
-	static void initSimpleTestData(Layout layout) {
+	static void initSimpleTestData(Layout<LayoutObject> layout) {
 		int n = 0;
 		LayoutObject p0 = new BaseLayoutObject(String.valueOf(n++));
 		p0.setPosition(250, 250);
@@ -79,7 +79,7 @@ public class Layouts {
 	 * @param layout
 	 *            The {@link Layout}
 	 */
-	public static void initTestData(Layout layout) {
+	public static void initTestData(Layout<LayoutObject> layout) {
 		initTestData(layout, 30, 0.1, 0.9, 0.1, 0.9);
 		initTestData(layout, 10, 0.3, 0.6, 0.6, 0.5);
 	}
@@ -100,7 +100,7 @@ public class Layouts {
 	 * @param maxY
 	 *            The maximum y-coordinate for the objects, exclusive
 	 */
-	private static void initTestData(Layout layout, int numObjects, double minX, double maxX, double minY,
+	private static void initTestData(Layout<LayoutObject> layout, int numObjects, double minX, double maxX, double minY,
 			double maxY) {
 		double minSizeX = 0.03;
 		double maxSizeX = 0.15;

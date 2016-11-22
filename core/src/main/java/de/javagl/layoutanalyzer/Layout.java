@@ -27,25 +27,25 @@
 package de.javagl.layoutanalyzer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
- * A layout is a collection of {@link LayoutObject}s
+ * A layout is a collection of {@link LayoutObject}s and there bounding box
  */
-public class Layout {
+public class Layout<T extends LayoutObject> {
 	/**
 	 * The {@link LayoutObject}s
 	 */
-	private List<LayoutObject> layoutObjects;
-
+	private final List<T> layoutObjects;
 	/**
 	 * Creates a new, empty layout
 	 */
 	public Layout() {
-		this.layoutObjects = new ArrayList<LayoutObject>();
+		this.layoutObjects = new ArrayList<T>(); // CopyOnWriteArrayList ???
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Layout {
 	 * 
 	 * @return The {@link LayoutObject}s
 	 */
-	public List<LayoutObject> getLayoutObjects() {
+	public List<T> getLayoutObjects() {
 		return Collections.unmodifiableList(layoutObjects);
 	}
 
@@ -63,28 +63,33 @@ public class Layout {
 	 * @param layoutObject
 	 *            The {@link LayoutObject}
 	 */
-	public void addLayoutObject(LayoutObject layoutObject) {
-		layoutObjects.add(layoutObject);
+	public synchronized void addLayoutObject(T object) {
+		layoutObjects.add(object);
 	}
 
-	/**
-	 * Remove the given {@link LayoutObject} from this layout
-	 * 
-	 * @param layoutObject
-	 *            The {@link LayoutObject}
-	 */
-	public boolean removeLayoutObject(LayoutObject layoutObject) {
-		if (layoutObjects == null)
-			return false;
 
-		return layoutObjects.remove(layoutObject);
+  /**
+   * Remove the given {@link LayoutObject} from this layout
+   * 
+   * @param layoutObject
+   *            The {@link LayoutObject}
+   */
+	public synchronized void removeLayoutObject(T object) {
+		layoutObjects.remove(object);
+	}
+
+	public synchronized void addAll(Collection<T> objects) {
+		layoutObjects.addAll(objects);
+	}
+
+	public synchronized void removeAll(Collection<T> objects) {
+		layoutObjects.removeAll(objects);
 	}
 	
-	/**
-	 * Removes all {@link LayoutObject} from this layout
-	 */
-	public void clear() {
-		layoutObjects.clear();
-	}
-
+	 /**
+   * Removes all {@link LayoutObject} from this layout
+   */
+  public synchronized void clear() {
+    layoutObjects.clear();
+  }
 }

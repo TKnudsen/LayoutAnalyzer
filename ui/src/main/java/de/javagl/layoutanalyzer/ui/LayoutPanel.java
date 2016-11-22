@@ -55,7 +55,7 @@ import de.javagl.layoutanalyzer.utils.Colors;
  * A panel that shows a {@link Layout} consisting of {@link LayoutObject}s, and
  * optionally visualizes {@link AspectData}
  */
-public class LayoutPanel extends JPanel {
+public class LayoutPanel<T extends LayoutObject> extends JPanel {
 	/**
 	 * Serial UID
 	 */
@@ -71,7 +71,7 @@ public class LayoutPanel extends JPanel {
 	 * The {@link Layout} that is shown in this panel
 	 * 
 	 */
-	private final Layout layout;
+	private final Layout<T> layout;
 
 	/**
 	 * The optional {@link LayoutAspects} that may be shown in this panel
@@ -94,7 +94,7 @@ public class LayoutPanel extends JPanel {
 	 * @param layout
 	 *            The {@link Layout} that should be shown in this panel
 	 */
-	public LayoutPanel(Layout layout) {
+	public LayoutPanel(Layout<T> layout) {
 		Objects.requireNonNull(layout, "The layout is null");
 		this.layout = layout;
 	}
@@ -116,7 +116,7 @@ public class LayoutPanel extends JPanel {
 	 * 
 	 * @return The {@link LayoutObject}s
 	 */
-	public List<LayoutObject> getLayoutObjects() {
+	public List<T> getLayoutObjects() {
 		return layout.getLayoutObjects();
 	}
 
@@ -126,7 +126,7 @@ public class LayoutPanel extends JPanel {
 	 * @param layoutObject
 	 *            The {@link LayoutObject}
 	 */
-	public void addLayoutObject(LayoutObject layoutObject) {
+	public void addLayoutObject(T layoutObject) {
 		layout.addLayoutObject(layoutObject);
 		repaint();
 	}
@@ -137,7 +137,7 @@ public class LayoutPanel extends JPanel {
 	 * @param layoutObject
 	 *            The {@link LayoutObject}
 	 */
-	public boolean removeLayoutObject(LayoutObject layoutObject) {
+	public boolean removeLayoutObject(T layoutObject) {
 		layout.removeLayoutObject(layoutObject);
 		repaint();
 		return true;
@@ -168,7 +168,7 @@ public class LayoutPanel extends JPanel {
 		g.setFont(DEFAULT_FONT);
 		FontMetrics fontMetrics = g.getFontMetrics();
 
-		List<LayoutObject> layoutObjects = layout.getLayoutObjects();
+		List<T> layoutObjects = layout.getLayoutObjects();
 		for (LayoutObject layoutObject : layoutObjects) {
 			AffineTransform scale = AffineTransform.getScaleInstance(getWidth(), getHeight());
 			Point2D position = layoutObject.getPosition();
@@ -204,7 +204,7 @@ public class LayoutPanel extends JPanel {
 		}
 		ArrowCreator arrowCreator = Arrows.create().setAbsoluteHeadLength(15).setAbsoluteHeadWidth(10);
 
-		List<LayoutObject> layoutObjects = layout.getLayoutObjects();
+		List<T> layoutObjects = layout.getLayoutObjects();
 		for (LayoutObject layoutObject : layoutObjects) {
 			AffineTransform scale = AffineTransform.getScaleInstance(getWidth(), getHeight());
 			Point2D position = layoutObject.getPosition();

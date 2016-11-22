@@ -44,6 +44,7 @@ import de.javagl.layoutanalyzer.aspects.PairwiseRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsBorderRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.ShapeBoundsRepulsionForce;
 import de.javagl.layoutanalyzer.aspects.TargetPositionForce;
+import de.javagl.layoutanalyzer.objects.LayoutObject;
 import de.javagl.layoutanalyzer.quality.ForceLengthQualityMeasure;
 import de.javagl.layoutanalyzer.quality.QualityMeasure;
 import de.javagl.layoutanalyzer.ui.QualityDataPanel;
@@ -81,7 +82,7 @@ public class LayoutAnalyzerMain
         f.getContentPane().setLayout(new BorderLayout());
 
         // Create the Layout and initialize it with some test data
-        Layout layout = new Layout();
+        Layout<LayoutObject> layout = new Layout<LayoutObject>();
         Layouts.initTestData(layout);
         
         // Create the panel that shows the layout

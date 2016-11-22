@@ -53,11 +53,11 @@ import de.javagl.layoutanalyzer.objects.LayoutObject;
  * {@link LayouterListener} instances may be attached to a layouter, to be informed whenever a
  * new {@link LayoutAspects} has been computed and a new step has been performed.
  */
-public class Layouter {
+public class Layouter<T extends LayoutObject> {
   /**
    * The {@link Layout} summarizing the {@link LayoutObject}s on which this layouter operates
    */
-  private final Layout layout;
+  private final Layout<T> layout;
 
   /**
    * The {@link Aspect}s which provide the {@link AspectData} (containing the forces) that govern
@@ -93,7 +93,7 @@ public class Layouter {
    * @param layout
    *          The {@link Layout} on which this layouter operates
    */
-  public Layouter(Layout layout) {
+  public Layouter(Layout<T> layout) {
     Objects.requireNonNull(layout, "The layout is null");
 
     this.layout = layout;
