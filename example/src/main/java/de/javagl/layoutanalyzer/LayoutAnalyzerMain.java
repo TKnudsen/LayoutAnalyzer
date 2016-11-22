@@ -172,7 +172,7 @@ public class LayoutAnalyzerMain
                 controlPanel.repaint();
             }
         };
-        layouter.addLayouterDataListener(layouterDataListener);
+        layouter.addLayouterListener(layouterDataListener);
 
         // Create the task that will run the Layouter in an own
         // thread, and add a control panel for the task runner

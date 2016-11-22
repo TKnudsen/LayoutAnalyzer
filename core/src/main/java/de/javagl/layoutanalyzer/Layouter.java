@@ -1,5 +1,5 @@
 /*
- * LayoutAnalyzer  
+< * LayoutAnalyzer  
  *
  * Copyright (c) 2015-2015 Marco Hutter - http://www.javagl.de
  *
@@ -28,6 +28,7 @@ package de.javagl.layoutanalyzer;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -37,8 +38,7 @@ import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
- * The class computing the positions of the {@link LayoutObject}s in a
- * {@link Layout}, using a
+ * The class computing the positions of the {@link LayoutObject}s in a {@link Layout}, using a
  * simple "physically based simulation".<br>
  * <br>
  * It summarizes several {@link Aspect}s, which provide the {@link AspectData} for the
@@ -50,8 +50,8 @@ import de.javagl.layoutanalyzer.objects.LayoutObject;
  * that are stored in these {@link AspectData} objects are accumulated and used for the simulation
  * step.<br>
  * <br>
- * {@link LayouterListener} instances may be attached to a layouter, to be informed whenever a
- * new {@link LayoutAspects} has been computed and a new step has been performed.
+ * {@link LayouterListener} instances may be attached to a layouter, to be informed whenever a new
+ * {@link LayoutAspects} has been computed and a new step has been performed.
  */
 public class Layouter<T extends LayoutObject> {
   /**
@@ -81,11 +81,37 @@ public class Layouter<T extends LayoutObject> {
   private final double timeStep;
 
   /**
-   * The {@link LayouterListener}s that have been attached, and will be informed about the
-   * computed {@link LayoutAspects} each time that a simulation step is performed in
-   * {@link #performStep()}
+   * The current state of the layout regarding forces computed by aspects
+   */
+  private LayoutAspects currentAspectForces;
+
+  /**
+   * The {@link LayouterListener}s that have been attached, and will be informed about the computed
+   * {@link LayoutAspects} each time that a simulation step is performed in {@link #performStep()}
    */
   private final List<LayouterListener> layouterDataListeners;
+
+  /**
+   * Indicates when the Layout is stable or not
+   */
+  private boolean isStable;
+
+  /**
+   * The first step when the Layout entered a stabel mode
+   */
+  private int firstStableStep;
+
+  /**
+   * If length of velocity Vector is less or equal this value the Layout is considerd stabel
+   * {@link #updateVelocities()}
+   */
+  private static final double EPSILON_STABLE = 1e-1;
+
+  /**
+   * List of {@link LayouterExtension} which are invoced after a layout step is performed in
+   * {@link #performStep()}
+   */
+  private final List<LayouterExtension<T>> extensions;
 
   /**
    * Default constructor
@@ -93,26 +119,68 @@ public class Layouter<T extends LayoutObject> {
    * @param layout
    *          The {@link Layout} on which this layouter operates
    */
-  public Layouter(Layout<T> layout) {
+  public Layouter(Layout<T> layout, List<Aspect> aspects) {
     Objects.requireNonNull(layout, "The layout is null");
 
     this.layout = layout;
-    this.aspects = new ArrayList<Aspect>();
+    this.aspects = new ArrayList<Aspect>(aspects);
     this.layouterDataListeners = new CopyOnWriteArrayList<LayouterListener>();
 
     this.step = 0;
     this.totalTime = 0.0;
     this.timeStep = 0.5;
+
+    currentAspectForces = new LayoutAspects();
+    isStable = false;
+    firstStableStep = -1;
+    extensions = new CopyOnWriteArrayList<LayouterExtension<T>>();
+  }
+  
+  /**
+   * Default constructor
+   * 
+   * @param layout
+   *          The {@link Layout} on which this layouter operates
+   */
+  public Layouter(Layout<T> layout) {
+    this(layout, Collections.emptyList());
   }
 
   /**
-   * Add the given {@link LayouterListener} to be informed about each {@link LayoutAspects} that
-   * is computed in {@link #performStep()}
+   * Adds an extension to this Layouter, the order the extensions are called is not fix. It is
+   * possible to add and remove extension by runtime.
+   * 
+   * @param extension
+   *          the {@link LayouterExtension} which is invoced after {@link #performStep()}
+   */
+  public void addExtension(LayouterExtension<T> extension) {
+    Objects.requireNonNull(extension, "The extension is null");
+    extensions.add(extension);
+  }
+
+  /**
+   * @param extension
+   *          removes given extension, possible during runtime
+   */
+  public void removeExtension(LayouterExtension<T> extension) {
+    extensions.remove(extension);
+  }
+
+  /**
+   * @return whenever or not the Layout {@link #isStable}
+   */
+  public boolean isStable() {
+    return isStable;
+  }
+
+  /**
+   * Add the given {@link LayouterListener} to be informed about each {@link LayoutAspects} that is
+   * computed in {@link #performStep()}
    * 
    * @param layouterDataListener
    *          The listener to add
    */
-  public void addLayouterDataListener(LayouterListener layouterDataListener) {
+  public void addLayouterListener(LayouterListener layouterDataListener) {
     Objects.requireNonNull(layouterDataListener, "The listener is null");
     layouterDataListeners.add(layouterDataListener);
   }
@@ -122,17 +190,17 @@ public class Layouter<T extends LayoutObject> {
    * 
    * @param layouterDataListener
    *          The listener to remove
-   * @see #addLayouterDataListener(LayouterListener)
+   * @see #addLayouterListener(LayouterListener)
    */
-  public void removeLayouterDataListener(LayouterListener layouterDataListener) {
+  public void removeLayouterListener(LayouterListener layouterDataListener) {
     layouterDataListeners.remove(layouterDataListener);
   }
 
   /**
-   * Add the given {@link Aspect} to be consulted during the computation of the {@link LayoutAspects}
-   * the next time that {@link #performStep()} is called. This aspect will be used to compute the
-   * {@link AspectData} for the {@link LayoutObject}s, which contains the forces that govern the
-   * motion of the {@link LayoutObject}s during the simulation.
+   * Add the given {@link Aspect} to be consulted during the computation of the
+   * {@link LayoutAspects} the next time that {@link #performStep()} is called. This aspect will be
+   * used to compute the {@link AspectData} for the {@link LayoutObject}s, which contains the forces
+   * that govern the motion of the {@link LayoutObject}s during the simulation.
    * 
    * @param aspect
    *          The {@link Aspect} to add
@@ -159,17 +227,71 @@ public class Layouter<T extends LayoutObject> {
    * {@link LayoutObject}s. These forces will affect the accelerations, velocities and positions of
    * the {@link LayoutObject} through a simple time integration.
    */
-  public void performStep() {
+  public void performStep(boolean notify) {
     LayoutAspects layouterData = computeLayouterData();
 
     applyForces(layouterData);
     updateAccelerations();
     updateVelocities();
     updatePositions();
+    updateStable();
+
     totalTime += timeStep;
     step++;
 
-    notifyLayouterDataComputed(layouterData);
+    synchronized (currentAspectForces) {
+      currentAspectForces = layouterData;
+    }
+
+    extensions.stream().filter(e -> e.isEnabled()).forEach(e -> e.process(layout));
+
+    if (notify) {
+      notifyLayouterDataComputed(layouterData);
+    }
+  }
+
+  /**
+   * see {@link #performStep(boolean)} with notification on
+   */
+  public void performStep() {
+    performStep(true);
+  }
+
+  /**
+   * @return unmodifiable list of aspects currently in use for the layout
+   */
+  public List<Aspect> getAspects() {
+    return Collections.unmodifiableList(aspects);
+  }
+
+  /**
+   * @return the current forces in the layout by different aspects
+   */
+  public LayoutAspects getCurrentAspectForces() {
+    return currentAspectForces;
+  }
+
+  /**
+   * @return current state of the layout
+   */
+  public Layout<T> getLayout() {
+    return layout;
+  }
+
+  /**
+   * @return number of {@link #performStep()} since start (creation of Layouter)
+   */
+  public int getStep() {
+    return step;
+  }
+
+  /**
+   * when {@link #isStable()} is true this function returns the step when the layout turned stable
+   * 
+   * @return step when layout turned stable
+   */
+  public int getFirstStableStep() {
+    return firstStableStep;
   }
 
   /**
@@ -191,8 +313,8 @@ public class Layouter<T extends LayoutObject> {
   }
 
   /**
-   * Notify all registered {@link LayouterListener}s that a new {@link LayoutAspects} was
-   * computed and a step was performed.
+   * Notify all registered {@link LayouterListener}s that a new {@link LayoutAspects} was computed
+   * and a step was performed.
    * 
    * @param layouterData
    *          The {@link LayoutAspects} that was computed
@@ -205,8 +327,8 @@ public class Layouter<T extends LayoutObject> {
 
   /**
    * For each {@link LayoutObject}, compute the sum of all forces that are assigned to the object
-   * based on the {@link AspectData}s in the given {@link LayoutAspects}, and assign this accumulated
-   * force to the object via {@link LayoutObject#setForce(Point2D)}
+   * based on the {@link AspectData}s in the given {@link LayoutAspects}, and assign this
+   * accumulated force to the object via {@link LayoutObject#setForce(Point2D)}
    * 
    * @param layouterData
    *          The {@link LayoutAspects}
@@ -218,6 +340,8 @@ public class Layouter<T extends LayoutObject> {
         AspectData layoutData = layouterData.getLayoutData(aspect);
         double aspectWeight = aspect.getWeight();
         Point2D contributedForce = layoutData.getForce(layoutObject);
+        // TODO In Layouter from LayoutOptimizer here was a check if contributedForce is null for
+        // the next line
         Points.addScaled(totalForce, aspectWeight, contributedForce, totalForce);
       }
       layoutObject.setForce(totalForce);
@@ -253,6 +377,27 @@ public class Layouter<T extends LayoutObject> {
       layoutObject.setVelocity(velocity);
       // System.out.println("Vel "+velocity);
     }
+  }
+
+  /**
+   * Update {@link #isStable} and {@link #firstStableStep} and determines if Layout is in a stable
+   * state by testing if a velocity exist which exceeds {@link #EPSILON_STABLE}
+   */
+  private void updateStable() {
+    boolean stillMoving = false;
+    for (LayoutObject obj : layout.getLayoutObjects()) {
+      Point2D velocity = obj.getVelocity();
+      double velocityMagnitude = velocity.distance(new Point2D.Double());
+
+      if (velocityMagnitude > EPSILON_STABLE) {
+        stillMoving = true;
+      }
+    }
+
+    if (!stillMoving && isStable == false) {
+      firstStableStep = step;
+    }
+    isStable = !stillMoving;
   }
 
   /**
