@@ -89,6 +89,7 @@ public class AspectPanel extends JPanel {
   private JPanel createControlPanel() {
     JPanel controlPanel = new JPanel(new GridLayout(1, 0));
     JSlider slider = new JSlider(0, 100, 100);
+    slider.setOrientation(JSlider.VERTICAL);
     slider.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
