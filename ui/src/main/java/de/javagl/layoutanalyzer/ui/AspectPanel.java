@@ -32,6 +32,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -114,7 +115,7 @@ public class AspectPanel extends JPanel {
     aspect.addListener(new AspectListener() {
       @Override
       public void changedWeight(Aspect aspect) {
-        slider.setValue((int) (aspect.getWeight() * 100));
+        SwingUtilities.invokeLater(() -> slider.setValue((int) (aspect.getWeight() * 100)));
       }
     });
     controlPanel.add(slider);
