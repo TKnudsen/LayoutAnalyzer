@@ -36,6 +36,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import de.javagl.layoutanalyzer.AspectListener;
 import de.javagl.layoutanalyzer.QualityDataRecorder;
 import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.utils.Colors;
@@ -59,6 +60,8 @@ public class AspectPanel extends JPanel {
    */
   private final Aspect aspect;
 
+  private JSlider slider;
+
   /**
    * Creates a new panel that allows controlling the given {@link Aspect}, and shows the contents of
    * the given {@link QualityDataRecorder}
@@ -78,7 +81,15 @@ public class AspectPanel extends JPanel {
     setBorder(titledBorder);
 
     JPanel controlPanel = createControlPanel();
-    add(controlPanel, BorderLayout.NORTH);
+    add(controlPanel, BorderLayout.CENTER);
+  }
+
+  /**
+   * @param orientation
+   *          the orientation is same as {@link JSlider#setOrientation(int)}
+   */
+  public void setOrientation(int orientation) {
+    slider.setOrientation(orientation);
   }
 
   /**
@@ -88,13 +99,22 @@ public class AspectPanel extends JPanel {
    */
   private JPanel createControlPanel() {
     JPanel controlPanel = new JPanel(new GridLayout(1, 0));
-    JSlider slider = new JSlider(0, 100, 100);
-    slider.setOrientation(JSlider.VERTICAL);
+    slider = new JSlider(0, 100, 100);
     slider.addChangeListener(new ChangeListener() {
       @Override
       public void stateChanged(ChangeEvent e) {
         double weight = slider.getValue() / 100.0;
-        aspect.setWeight(weight);
+        if (weight != aspect.getWeight()) {
+          // Update only when slider and aspect differ
+          aspect.setWeight(weight);
+        }
+      }
+    });
+
+    aspect.addListener(new AspectListener() {
+      @Override
+      public void changedWeight(Aspect aspect) {
+        slider.setValue((int) (aspect.getWeight() * 100));
       }
     });
     controlPanel.add(slider);

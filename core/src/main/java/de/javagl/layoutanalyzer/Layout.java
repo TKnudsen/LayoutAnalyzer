@@ -74,22 +74,22 @@ public class Layout<T extends LayoutObject> {
    * @param layoutObject
    *            The {@link LayoutObject}
    */
-	public synchronized void removeLayoutObject(T object) {
+	public void removeLayoutObject(T object) {
 		layoutObjects.remove(object);
 	}
 
-	public synchronized void addAll(Collection<T> objects) {
+	public void addAll(Collection<T> objects) {
 		layoutObjects.addAll(objects);
 	}
 
-	public synchronized void removeAll(Collection<T> objects) {
+	public void removeAll(Collection<T> objects) {
 		layoutObjects.removeAll(objects);
 	}
 	
 	 /**
    * Removes all {@link LayoutObject} from this layout
    */
-  public synchronized void clear() {
+  public void clear() {
     layoutObjects.clear();
   }
 }

@@ -37,6 +37,7 @@ import java.util.Map;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 
 import de.javagl.layoutanalyzer.aspects.Aspect;
@@ -47,9 +48,9 @@ import de.javagl.layoutanalyzer.aspects.TargetPositionForce;
 import de.javagl.layoutanalyzer.objects.LayoutObject;
 import de.javagl.layoutanalyzer.quality.ForceLengthQualityMeasure;
 import de.javagl.layoutanalyzer.quality.QualityMeasure;
-import de.javagl.layoutanalyzer.ui.QualityDataPanel;
 import de.javagl.layoutanalyzer.ui.AspectPanel;
 import de.javagl.layoutanalyzer.ui.LayoutPanel;
+import de.javagl.layoutanalyzer.ui.QualityDataPanel;
 import de.javagl.layoutanalyzer.utils.LoggerUtil;
 import de.javagl.swing.tasks.runner.TaskRunner;
 import de.javagl.swing.tasks.runner.TaskRunnerControlPanel;
@@ -136,6 +137,7 @@ public class LayoutAnalyzerMain
         for (Aspect aspect : aspects)
         {
             AspectPanel aspectPanel = new AspectPanel(aspect);
+            aspectPanel.setOrientation(JSlider.VERTICAL);
             controlPanel.add(aspectPanel);
         }
         f.getContentPane().add(controlPanel, BorderLayout.WEST);
