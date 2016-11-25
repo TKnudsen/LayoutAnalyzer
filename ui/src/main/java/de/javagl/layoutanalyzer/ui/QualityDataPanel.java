@@ -50,10 +50,9 @@ public class QualityDataPanel extends JPanel {
    */
   private static int aspectColorCounter = 0;
 
-
   /**
-   * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the contents of
-   * the given {@link QualityDataRecorder}
+   * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the
+   * contents of the given {@link QualityDataRecorder}
    * 
    * @param qualityMeasure
    *          The {@link Aspect}

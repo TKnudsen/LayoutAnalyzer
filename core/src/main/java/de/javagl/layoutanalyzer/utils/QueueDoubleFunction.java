@@ -31,67 +31,60 @@ import java.util.List;
 import java.util.function.DoubleFunction;
 
 /**
- * Implementation of a <code>DoubleFunction</code> that internally maintains
- * a queue of <code>Double</code> values, and offers access to the elements
- * of this queue via the {@link #apply(double)} method. The argument that is
- * passed to this method is assumed to be in [0,1), and will be mapped to
- * the index of the respective queue element. If the resulting index is out
- * of bounds, <code>null</code> will be returned.
+ * Implementation of a <code>DoubleFunction</code> that internally maintains a queue of
+ * <code>Double</code> values, and offers access to the elements of this queue via the
+ * {@link #apply(double)} method. The argument that is passed to this method is assumed to be in
+ * [0,1), and will be mapped to the index of the respective queue element. If the resulting index is
+ * out of bounds, <code>null</code> will be returned.
  */
-final public class QueueDoubleFunction implements DoubleFunction<Double>
-{
-    /**
-     * The size of the queue
-     */
-    private final int size;
-    
-    /**
-     * The values of the queue
-     */
-    private final List<Double> values;
-    
-    /**
-     * Creates a new function with the given queue size
-     * 
-     * @param size The size of the queue
-     */
-    public QueueDoubleFunction(int size)
-    {
-        this.size = size;
-        this.values = new ArrayList<Double>();
-    }
-    
-    /**
-     * Add the given value to the internal queue, maintaining the maximum
-     * size of the queue
-     * 
-     * @param value The value to add
-     */
-    public void add(double value)
-    {
-        values.add(value);
-        while (values.size() > size)
-        {
-            values.remove(0);
-        }
-    }
-    
-    /**
-     * Removes all elements from the internal queue
-     */
-    public void clear()
-    {
-        values.clear();
-    }
+final public class QueueDoubleFunction implements DoubleFunction<Double> {
+  /**
+   * The size of the queue
+   */
+  private final int size;
 
-    @Override
-    public Double apply(double value)
-    {
-        int index = (int)(value * size);
-        if (index < 0 || index >= values.size())
-        {
-            return null;
-        }
-        return values.get(index);
+  /**
+   * The values of the queue
+   */
+  private final List<Double> values;
+
+  /**
+   * Creates a new function with the given queue size
+   * 
+   * @param size
+   *          The size of the queue
+   */
+  public QueueDoubleFunction(int size) {
+    this.size = size;
+    this.values = new ArrayList<Double>();
+  }
+
+  /**
+   * Add the given value to the internal queue, maintaining the maximum size of the queue
+   * 
+   * @param value
+   *          The value to add
+   */
+  public void add(double value) {
+    values.add(value);
+    while (values.size() > size) {
+      values.remove(0);
     }
+  }
+
+  /**
+   * Removes all elements from the internal queue
+   */
+  public void clear() {
+    values.clear();
+  }
+
+  @Override
+  public Double apply(double value) {
+    int index = (int) (value * size);
+    if (index < 0 || index >= values.size()) {
+      return null;
+    }
+    return values.get(index);
+  }
 }

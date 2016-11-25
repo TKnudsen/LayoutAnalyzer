@@ -49,7 +49,7 @@ public class BaseLayoutObject implements LayoutObject {
   public BaseLayoutObject() {
     this.label = "";
   }
-  
+
   /**
    * Creates a new object with the given label
    * 

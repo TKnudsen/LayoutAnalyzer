@@ -88,7 +88,7 @@ public class TargetPositionForce extends AbstractAspect implements Aspect {
       Point2D position0 = layoutObject.getPosition();
       Point2D position1 = targetPositions.get(layoutObject);
       double distance = position0.distance(position1);
-      
+
       if (distance > EPSILON) {
         Points.sub(position1, position0, difference);
         Points.scale(difference, 1.0 / distance, direction);

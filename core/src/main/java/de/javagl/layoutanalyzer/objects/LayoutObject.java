@@ -75,7 +75,6 @@ public interface LayoutObject {
    */
   public Point2D getPosition();
 
-
   /**
    * Set the velocity of this object to be the same as the given velocity
    *

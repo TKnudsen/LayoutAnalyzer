@@ -20,13 +20,15 @@ public class ForceLengthQualityMeasure implements QualityMeasure {
    * The aspect this quality is computed on
    */
   private Aspect forceAspect;
-  
+
   private double minForceLength;
   private double maxForceLength;
 
   /**
    * Default Constructor
-   * @param forceAspect the @link {@link Aspect} this {@link QualityMeasure} is computed on
+   * 
+   * @param forceAspect
+   *          the @link {@link Aspect} this {@link QualityMeasure} is computed on
    */
   public ForceLengthQualityMeasure(Aspect forceAspect) {
     // XXX TODO Avoid these VERY magic constants ASAP !!!

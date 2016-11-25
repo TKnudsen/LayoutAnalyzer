@@ -105,7 +105,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
     this.layout = layout;
     setLayoutObjectPainter(layoutObjectPainter);
   }
-  
+
   /**
    * Default constructor
    * 

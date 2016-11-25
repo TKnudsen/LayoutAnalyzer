@@ -64,7 +64,6 @@ public class Layouter<T extends LayoutObject> {
    * the movement of the {@link LayoutObject}s during the simulation.
    */
   private final List<Aspect> aspects;
-  
 
   /**
    * A step counter
@@ -136,7 +135,7 @@ public class Layouter<T extends LayoutObject> {
     firstStableStep = -1;
     extensions = new CopyOnWriteArrayList<LayouterExtension<T>>();
   }
-  
+
   /**
    * Default constructor
    * 

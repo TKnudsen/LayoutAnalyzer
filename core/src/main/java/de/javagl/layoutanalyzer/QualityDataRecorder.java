@@ -32,84 +32,83 @@ import java.util.function.DoubleFunction;
 import de.javagl.layoutanalyzer.utils.QueueDoubleFunction;
 
 /**
- * A helper class summarizing the minimum- maximum and average quality values
- * from the {@link QualityData} objects that it receives, and offers them as
- * functions that map the range [0,1] to a fixed set of recent quality values.
+ * A helper class summarizing the minimum- maximum and average quality values from the
+ * {@link QualityData} objects that it receives, and offers them as functions that map the range
+ * [0,1] to a fixed set of recent quality values.
  */
 public class QualityDataRecorder {
-	/**
-	 * The {@link QueueDoubleFunction} storing the minimum qualities
-	 */
-	private final QueueDoubleFunction minQualityFunction;
+  /**
+   * The {@link QueueDoubleFunction} storing the minimum qualities
+   */
+  private final QueueDoubleFunction minQualityFunction;
 
-	/**
-	 * The {@link QueueDoubleFunction} storing the maximum qualities
-	 */
-	private final QueueDoubleFunction maxQualityFunction;
+  /**
+   * The {@link QueueDoubleFunction} storing the maximum qualities
+   */
+  private final QueueDoubleFunction maxQualityFunction;
 
-	/**
-	 * The {@link QueueDoubleFunction} storing the average qualities
-	 */
-	private final QueueDoubleFunction avgQualityFunction;
+  /**
+   * The {@link QueueDoubleFunction} storing the average qualities
+   */
+  private final QueueDoubleFunction avgQualityFunction;
 
-	/**
-	 * Creates a new instance that stores the specified number of quality
-	 * values, and offers them as functions.
-	 * 
-	 * @param queueSize
-	 *            The queue size
-	 */
-	public QualityDataRecorder(int queueSize) {
-		minQualityFunction = new QueueDoubleFunction(queueSize);
-		maxQualityFunction = new QueueDoubleFunction(queueSize);
-		avgQualityFunction = new QueueDoubleFunction(queueSize);
-	}
+  /**
+   * Creates a new instance that stores the specified number of quality values, and offers them as
+   * functions.
+   * 
+   * @param queueSize
+   *          The queue size
+   */
+  public QualityDataRecorder(int queueSize) {
+    minQualityFunction = new QueueDoubleFunction(queueSize);
+    maxQualityFunction = new QueueDoubleFunction(queueSize);
+    avgQualityFunction = new QueueDoubleFunction(queueSize);
+  }
 
-	/**
-	 * Record the minimum, maximum and average quality value from the given
-	 * {@link QualityData}
-	 * 
-	 * @param qualityData
-	 *            The {@link QualityData}
-	 */
-	public void record(QualityData qualityData) {
-		Objects.requireNonNull(qualityData, "The qualityData is null");
-		minQualityFunction.add(qualityData.getMin());
-		maxQualityFunction.add(qualityData.getMax());
-		avgQualityFunction.add(qualityData.getAverage());
-	}
+  /**
+   * Record the minimum, maximum and average quality value from the given {@link QualityData}
+   * 
+   * @param qualityData
+   *          The {@link QualityData}
+   */
+  public void record(QualityData qualityData) {
+    Objects.requireNonNull(qualityData, "The qualityData is null");
+    minQualityFunction.add(qualityData.getMin());
+    maxQualityFunction.add(qualityData.getMax());
+    avgQualityFunction.add(qualityData.getAverage());
+  }
 
-	/**
-	 * Returns the function that maps the range [0,1] to the most recent minimum
-	 * quality values that have been recorded. For values outside of this range,
-	 * the function will return <code>null</code>
-	 * 
-	 * @return The function
-	 */
-	public DoubleFunction<Double> getMinQualityFunction() {
-		return minQualityFunction;
-	}
+  /**
+   * Returns the function that maps the range [0,1] to the most recent minimum quality values that
+   * have been recorded. For values outside of this range, the function will return
+   * <code>null</code>
+   * 
+   * @return The function
+   */
+  public DoubleFunction<Double> getMinQualityFunction() {
+    return minQualityFunction;
+  }
 
-	/**
-	 * Returns the function that maps the range [0,1] to the most recent maximum
-	 * quality values that have been recorded. For values outside of this range,
-	 * the function will return <code>null</code>
-	 * 
-	 * @return The function
-	 */
-	public DoubleFunction<Double> getMaxQualityFunction() {
-		return maxQualityFunction;
-	}
+  /**
+   * Returns the function that maps the range [0,1] to the most recent maximum quality values that
+   * have been recorded. For values outside of this range, the function will return
+   * <code>null</code>
+   * 
+   * @return The function
+   */
+  public DoubleFunction<Double> getMaxQualityFunction() {
+    return maxQualityFunction;
+  }
 
-	/**
-	 * Returns the function that maps the range [0,1] to the most recent average
-	 * quality values that have been recorded. For values outside of this range,
-	 * the function will return <code>null</code>
-	 * 
-	 * @return The function
-	 */
-	public DoubleFunction<Double> getAvgQualityFunction() {
-		return avgQualityFunction;
-	}
+  /**
+   * Returns the function that maps the range [0,1] to the most recent average quality values that
+   * have been recorded. For values outside of this range, the function will return
+   * <code>null</code>
+   * 
+   * @return The function
+   */
+  public DoubleFunction<Double> getAvgQualityFunction() {
+    return avgQualityFunction;
+  }
 
 }

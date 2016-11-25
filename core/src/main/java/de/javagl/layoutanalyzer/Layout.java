@@ -37,56 +37,56 @@ import de.javagl.layoutanalyzer.objects.LayoutObject;
  * A layout is a collection of {@link LayoutObject}s and there bounding box
  */
 public class Layout<T extends LayoutObject> {
-	/**
-	 * The {@link LayoutObject}s
-	 */
-	private final List<T> layoutObjects;
-	/**
-	 * Creates a new, empty layout
-	 */
-	public Layout() {
-		this.layoutObjects = new CopyOnWriteArrayList<T>(); // CopyOnWriteArrayList ???
-	}
+  /**
+   * The {@link LayoutObject}s
+   */
+  private final List<T> layoutObjects;
 
-	/**
-	 * Returns an unmodifiable view on the {@link LayoutObject}s
-	 * 
-	 * @return The {@link LayoutObject}s
-	 */
-	public List<T> getLayoutObjects() {
-		return Collections.unmodifiableList(layoutObjects);
-	}
+  /**
+   * Creates a new, empty layout
+   */
+  public Layout() {
+    this.layoutObjects = new CopyOnWriteArrayList<T>(); // CopyOnWriteArrayList ???
+  }
 
-	/**
-	 * Add the given {@link LayoutObject} to this layout
-	 * 
-	 * @param layoutObject
-	 *            The {@link LayoutObject}
-	 */
-	public synchronized void addLayoutObject(T object) {
-		layoutObjects.add(object);
-	}
+  /**
+   * Returns an unmodifiable view on the {@link LayoutObject}s
+   * 
+   * @return The {@link LayoutObject}s
+   */
+  public List<T> getLayoutObjects() {
+    return Collections.unmodifiableList(layoutObjects);
+  }
 
+  /**
+   * Add the given {@link LayoutObject} to this layout
+   * 
+   * @param layoutObject
+   *          The {@link LayoutObject}
+   */
+  public synchronized void addLayoutObject(T object) {
+    layoutObjects.add(object);
+  }
 
   /**
    * Remove the given {@link LayoutObject} from this layout
    * 
    * @param layoutObject
-   *            The {@link LayoutObject}
+   *          The {@link LayoutObject}
    */
-	public void removeLayoutObject(T object) {
-		layoutObjects.remove(object);
-	}
+  public void removeLayoutObject(T object) {
+    layoutObjects.remove(object);
+  }
 
-	public void addAll(Collection<T> objects) {
-		layoutObjects.addAll(objects);
-	}
+  public void addAll(Collection<T> objects) {
+    layoutObjects.addAll(objects);
+  }
 
-	public void removeAll(Collection<T> objects) {
-		layoutObjects.removeAll(objects);
-	}
-	
-	 /**
+  public void removeAll(Collection<T> objects) {
+    layoutObjects.removeAll(objects);
+  }
+
+  /**
    * Removes all {@link LayoutObject} from this layout
    */
   public void clear() {

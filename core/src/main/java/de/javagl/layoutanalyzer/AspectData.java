@@ -36,99 +36,94 @@ import de.javagl.layoutanalyzer.aspects.Aspect;
 import de.javagl.layoutanalyzer.objects.LayoutObject;
 
 /**
- * The data that is computed by an {@link Aspect}, for a given set of
- * {@link LayoutObject}s, and which affects the layout process.<br>
+ * The data that is computed by an {@link Aspect}, for a given set of {@link LayoutObject}s, and
+ * which affects the layout process.<br>
  * <br>
- * Currently, this only consists of <i>forces</i> that may be applied to the
- * layout objects during the simulation in the {@link Layouter}.
+ * Currently, this only consists of <i>forces</i> that may be applied to the layout objects during
+ * the simulation in the {@link Layouter}.
  */
 public class AspectData {
-	/**
-	 * The list of {@link LayoutObject}s for which this data was computed
-	 */
-	private final List<LayoutObject> layoutObjects;
+  /**
+   * The list of {@link LayoutObject}s for which this data was computed
+   */
+  private final List<LayoutObject> layoutObjects;
 
-	/**
-	 * The weight which was set for the {@link Aspect} when this data was
-	 * computed.
-	 * 
-	 * @see Aspect#setWeight(double)
-	 */
-	private final double weight;
+  /**
+   * The weight which was set for the {@link Aspect} when this data was computed.
+   * 
+   * @see Aspect#setWeight(double)
+   */
+  private final double weight;
 
-	/**
-	 * The mapping from {@link LayoutObject}s to forces.
-	 */
-	private final Map<LayoutObject, Point2D> forces;
+  /**
+   * The mapping from {@link LayoutObject}s to forces.
+   */
+  private final Map<LayoutObject, Point2D> forces;
 
-	/**
-	 * Default constructor. A reference to the given list will be stored. It
-	 * should thus be an unmodifiable list, and should not be changed after it
-	 * has been passed to this constructor.
-	 * 
-	 * @param layoutObjects
-	 *            The {@link LayoutObject}s
-	 * @param weight
-	 *            The weight that was set in the {@link Aspect}
-	 */
-	public AspectData(List<LayoutObject> layoutObjects, double weight) {
-		Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
-		this.layoutObjects = layoutObjects;
-		this.weight = weight;
-		this.forces = new LinkedHashMap<LayoutObject, Point2D>();
-	}
+  /**
+   * Default constructor. A reference to the given list will be stored. It should thus be an
+   * unmodifiable list, and should not be changed after it has been passed to this constructor.
+   * 
+   * @param layoutObjects
+   *          The {@link LayoutObject}s
+   * @param weight
+   *          The weight that was set in the {@link Aspect}
+   */
+  public AspectData(List<LayoutObject> layoutObjects, double weight) {
+    Objects.requireNonNull(layoutObjects, "The layoutObjects are null");
+    this.layoutObjects = layoutObjects;
+    this.weight = weight;
+    this.forces = new LinkedHashMap<LayoutObject, Point2D>();
+  }
 
-	/**
-	 * Returns the weight that was set in the {@link Aspect} when this data was
-	 * computed.
-	 * 
-	 * @return The weight
-	 * @see Aspect#setWeight(double)
-	 */
-	public double getWeight() {
-		return weight;
-	}
+  /**
+   * Returns the weight that was set in the {@link Aspect} when this data was computed.
+   * 
+   * @return The weight
+   * @see Aspect#setWeight(double)
+   */
+  public double getWeight() {
+    return weight;
+  }
 
-	/**
-	 * Returns an unmodifiable list containing the {@link LayoutObject}s for
-	 * which this data was computed.
-	 * 
-	 * @return The {@link LayoutObject}s
-	 */
-	public List<LayoutObject> getLayoutObjects() {
-		return layoutObjects;
-	}
+  /**
+   * Returns an unmodifiable list containing the {@link LayoutObject}s for which this data was
+   * computed.
+   * 
+   * @return The {@link LayoutObject}s
+   */
+  public List<LayoutObject> getLayoutObjects() {
+    return layoutObjects;
+  }
 
-	/**
-	 * Set the force for the given {@link LayoutObject} to be a copy of the
-	 * given force.
-	 * 
-	 * @param layoutObject
-	 *            The {@link LayoutObject}
-	 * @param force
-	 *            The force.
-	 */
-	public void setForce(LayoutObject layoutObject, Point2D force) {
-		Objects.requireNonNull(layoutObject, "The layoutObject is null");
-		Objects.requireNonNull(force, "The force is null");
-		forces.put(layoutObject, new Point2D.Double(force.getX(), force.getY()));
-	}
+  /**
+   * Set the force for the given {@link LayoutObject} to be a copy of the given force.
+   * 
+   * @param layoutObject
+   *          The {@link LayoutObject}
+   * @param force
+   *          The force.
+   */
+  public void setForce(LayoutObject layoutObject, Point2D force) {
+    Objects.requireNonNull(layoutObject, "The layoutObject is null");
+    Objects.requireNonNull(force, "The force is null");
+    forces.put(layoutObject, new Point2D.Double(force.getX(), force.getY()));
+  }
 
-	/**
-	 * Returns a copy of the force that was set for the given
-	 * {@link LayoutObject}. If no force was associated with the given object,
-	 * then a new point (0,0) will be returned.
-	 * 
-	 * @param layoutObject
-	 *            The {@link LayoutObject}
-	 * @return The force
-	 */
-	public Point2D getForce(LayoutObject layoutObject) {
-		Objects.requireNonNull(layoutObject, "The layoutObject is null");
-		Point2D force = forces.get(layoutObject);
-		if (force == null) {
-			return new Point2D.Double();
-		}
-		return new Point2D.Double(force.getX(), force.getY());
-	}
+  /**
+   * Returns a copy of the force that was set for the given {@link LayoutObject}. If no force was
+   * associated with the given object, then a new point (0,0) will be returned.
+   * 
+   * @param layoutObject
+   *          The {@link LayoutObject}
+   * @return The force
+   */
+  public Point2D getForce(LayoutObject layoutObject) {
+    Objects.requireNonNull(layoutObject, "The layoutObject is null");
+    Point2D force = forces.get(layoutObject);
+    if (force == null) {
+      return new Point2D.Double();
+    }
+    return new Point2D.Double(force.getX(), force.getY());
+  }
 }
