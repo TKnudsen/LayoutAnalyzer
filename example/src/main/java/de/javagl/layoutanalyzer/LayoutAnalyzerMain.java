@@ -102,6 +102,8 @@ public class LayoutAnalyzerMain {
     for (Aspect a : aspects) {
       qualityMeasures.add(new ForceLengthQualityMeasure(a));
     }
+    
+    JPanel controlPanel = new JPanel(new BorderLayout());
 
     // Create the quality Panel, containing one QualityDataPanel for
     // each QualityMeasure, a panel for plotting the quality measures that are collected
@@ -118,20 +120,22 @@ public class LayoutAnalyzerMain {
       qualitieMeasuresPanel.add(qualityPanel);
       qualityDataRecorders.put(qualitieMeasures, qualityDataRecorder);
     }
-    f.getContentPane().add(qualitieMeasuresPanel, BorderLayout.EAST);
+    controlPanel.add(qualitieMeasuresPanel, BorderLayout.CENTER);
+    
 
     // Create the control panel, containing one AspectPanel for
     // each aspect, offering a slider for the weight
-    JPanel controlPanel = new JPanel();
-    BoxLayout boxLayout = new BoxLayout(controlPanel, BoxLayout.Y_AXIS);
-    controlPanel.setLayout(boxLayout);
+    JPanel controlsPanel = new JPanel();
+    BoxLayout boxLayout = new BoxLayout(controlsPanel, BoxLayout.Y_AXIS);
+    controlsPanel.setLayout(boxLayout);
     for (Aspect aspect : aspects) {
       AspectPanel aspectPanel = new AspectPanel(aspect);
       aspectPanel.setOrientation(JSlider.VERTICAL);
-      controlPanel.add(aspectPanel);
+      controlsPanel.add(aspectPanel);
     }
-    f.getContentPane().add(controlPanel, BorderLayout.WEST);
-
+    controlPanel.add(controlsPanel, BorderLayout.WEST);
+    f.getContentPane().add(controlPanel, BorderLayout.EAST);
+    
     // Create the Layouter and add all aspects to it
     Layouter layouter = new Layouter(layout);
     for (Aspect aspect : aspects) {
@@ -156,7 +160,7 @@ public class LayoutAnalyzerMain {
           qualityDataRecorder.record(qualityData);
         }
         qualitieMeasuresPanel.repaint();
-        controlPanel.repaint();
+        controlsPanel.repaint();
       }
     };
     layouter.addLayouterListener(layouterDataListener);
