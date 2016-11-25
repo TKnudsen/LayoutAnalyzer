@@ -4,7 +4,7 @@ allprojects {
     apply plugin: 'maven'
 
     group = 'de.javagl.LayoutAnalyzer'
-    version '0.1-SNAPSHOT'
+    version '0.2.0'
 
     repositories {
         mavenCentral()
