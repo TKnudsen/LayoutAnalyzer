@@ -38,6 +38,7 @@ public class DisjoinsTest
 
 class DisjoinsTestPanel extends JPanel implements MouseMotionListener
 {
+  private static final long serialVersionUID = -5075900047226127488L;
     private Rectangle2D rectangle0;
     private Rectangle2D rectangle1;
     
