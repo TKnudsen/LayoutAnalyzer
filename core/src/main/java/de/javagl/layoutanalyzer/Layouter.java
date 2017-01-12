@@ -78,7 +78,7 @@ public class Layouter<T extends LayoutObject> {
   /**
    * The size of a simulation time step
    */
-  private final double timeStep;
+  private double timeStep;
 
   /**
    * The current state of the layout regarding forces computed by aspects
@@ -156,6 +156,20 @@ public class Layouter<T extends LayoutObject> {
   public void addExtension(LayouterExtension<T> extension) {
     Objects.requireNonNull(extension, "The extension is null");
     extensions.add(extension);
+  }
+  
+  /**
+   * @param timeStep sets {@link #timeStep} default is 0.5
+   */
+  public void setTimeStep(double timeStep) {
+    this.timeStep = timeStep;
+  }
+  
+  /**
+   * @return return {@link #timeStep}
+   */
+  public double getTimeStep() {
+    return timeStep;
   }
 
   /**

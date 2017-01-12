@@ -90,6 +90,15 @@ public class LayouterTask implements Task {
     }
   }
 
+  /**
+   * @param stepDelayMs
+   *          {@link #stepDelayMs} the time to wait between two subsequent calls to
+   *          {@link Layouter#performStep()}
+   */
+  public void setStepDelayMs(long stepDelayMs) {
+    this.stepDelayMs = stepDelayMs;
+  }
+
   @Override
   public boolean isDone() {
     // Like writing such an application:
