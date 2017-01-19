@@ -97,18 +97,18 @@ public class Layouter<T extends LayoutObject> {
   private boolean isStable;
 
   /**
-   * The first step when the Layout entered a stabel mode
+   * The first step when the Layout entered a stable mode
    */
   private int firstStableStep;
 
   /**
-   * If length of velocity Vector is less or equal this value the Layout is considerd stabel
+   * If length of velocity Vector is less or equal this value the Layout is considered stable
    * {@link #updateVelocities()}
    */
-  private static final double EPSILON_STABLE = 1e-1;
+  private double epsilonStable = 1e-4;
 
   /**
-   * List of {@link LayouterExtension} which are invoced after a layout step is performed in
+   * List of {@link LayouterExtension} which are invoked after a layout step is performed in
    * {@link #performStep()}
    */
   private final List<LayouterExtension<T>> extensions;
@@ -298,7 +298,7 @@ public class Layouter<T extends LayoutObject> {
   public int getStep() {
     return step;
   }
-
+  
   /**
    * when {@link #isStable()} is true this function returns the step when the layout turned stable
    * 
@@ -306,6 +306,20 @@ public class Layouter<T extends LayoutObject> {
    */
   public int getFirstStableStep() {
     return firstStableStep;
+  }
+
+  /**
+   * @return the threshold when to consider this layout stable {@link #epsilonStable}
+   */
+  public double getEpsilonStable() {
+    return epsilonStable;
+  }
+
+  /**
+   * @param epsilonStable the threshold when to consider this layout stable {@link #epsilonStable}
+   */
+  public void setEpsilonStable(double epsilonStable) {
+    this.epsilonStable = epsilonStable;
   }
 
   /**
@@ -395,7 +409,7 @@ public class Layouter<T extends LayoutObject> {
 
   /**
    * Update {@link #isStable} and {@link #firstStableStep} and determines if Layout is in a stable
-   * state by testing if a velocity exist which exceeds {@link #EPSILON_STABLE}
+   * state by testing if a velocity exist which exceeds {@link #epsilonStable}
    */
   private void updateStable() {
     boolean stillMoving = false;
@@ -403,7 +417,7 @@ public class Layouter<T extends LayoutObject> {
       Point2D velocity = obj.getVelocity();
       double velocityMagnitude = velocity.distance(new Point2D.Double());
 
-      if (velocityMagnitude > EPSILON_STABLE) {
+      if (velocityMagnitude > epsilonStable) {
         stillMoving = true;
       }
     }
