@@ -74,6 +74,7 @@ abstract public class AbstractAspect implements Aspect {
   @Override
   public final void setWeight(double weight) {
     this.weight = Math.min(1.0, Math.max(0.0, weight));
+    fireListener();
   }
 
   protected void fireListener() {
