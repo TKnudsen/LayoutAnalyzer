@@ -86,7 +86,7 @@ public class LayoutAnalyzerMain {
     // Create the panel that shows the layout
     int WIDTH = 1000;
     int HEIGHT = 1000;
-    LayoutPanel layoutPanel = new LayoutPanel(layout);
+    LayoutPanel<LayoutObject> layoutPanel = new LayoutPanel<LayoutObject>(layout);
     layoutPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     f.getContentPane().add(layoutPanel, BorderLayout.CENTER);
 
@@ -137,7 +137,7 @@ public class LayoutAnalyzerMain {
     f.getContentPane().add(controlPanel, BorderLayout.EAST);
     
     // Create the Layouter and add all aspects to it
-    Layouter layouter = new Layouter(layout);
+    Layouter<LayoutObject> layouter = new Layouter<LayoutObject>(layout);
     for (Aspect aspect : aspects) {
       layouter.addAspect(aspect);
     }
