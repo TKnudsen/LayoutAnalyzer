@@ -20,14 +20,14 @@ public final class Points2D {
    *          the points to calculate the average form
    * @return the average point (aka. Center of Gravity)
    */
-  public static Point2D average(Iterable<? extends Point2D.Double> points) {
+  public static Point2D average(Iterable<? extends Point2D> points) {
     double x = 0;
     double y = 0;
     int count = 0;
 
-    for (Point2D.Double point : points) {
-      x += point.x;
-      y += point.y;
+    for (Point2D point : points) {
+      x += point.getX();
+      y += point.getY();
       count++;
     }
 
