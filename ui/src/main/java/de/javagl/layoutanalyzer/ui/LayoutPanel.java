@@ -75,7 +75,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
   /**
    * The optional {@link LayoutAspects} that may be shown in this panel
    */
-  private LayoutAspects layouterData;
+  protected LayoutAspects layouterData;
 
   /**
    * The {@link LayoutObjectPainter} used to draw the {@link LayoutObject}s in this panel. Defaults
@@ -212,7 +212,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
    * @param g
    *          The graphics
    */
-  private void paintForces(Graphics2D g) {
+  protected void paintForces(Graphics2D g) {
     if (layouterData == null) {
       return;
     }
