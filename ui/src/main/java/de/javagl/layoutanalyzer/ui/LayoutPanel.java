@@ -65,24 +65,24 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 	 * The default font that will be used for the labels of the
 	 * {@link LayoutObject}s
 	 */
-	private static final Font DEFAULT_FONT = new Font("Sans Serif", Font.PLAIN, 9);
+	protected static final Font DEFAULT_FONT = new Font("Sans Serif", Font.PLAIN, 9);
 
 	/**
 	 * The {@link Layout} that is shown in this panel
 	 * 
 	 */
-	private final Layout<T> layout;
+	protected final Layout<T> layout;
 
 	/**
 	 * The optional {@link LayoutAspects} that may be shown in this panel
 	 */
-	private LayoutAspects layouterData;
+	protected LayoutAspects layouterData;
 
 	/**
 	 * The {@link LayoutObjectPainter} used to draw the {@link LayoutObject}s in
 	 * this panel. Defaults to {@link DefaultLayoutObjectPainter}
 	 */
-	private LayoutObjectPainter<T> layoutObjectPainter;
+	protected LayoutObjectPainter<T> layoutObjectPainter;
 
 	/**
 	 * Whether the forces of any given {@link LayoutObject} are painted.
