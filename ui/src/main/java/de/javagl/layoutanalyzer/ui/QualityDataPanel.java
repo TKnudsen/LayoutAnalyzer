@@ -41,34 +41,36 @@ import de.javagl.layoutanalyzer.utils.Colors;
  * A panel containing basic monitoring components for one {@link QualityMeasure}.
  */
 public class QualityDataPanel extends JPanel {
-  /**
-   * Serial UID
-   */
-  private static final long serialVersionUID = -5259190132513158779L;
-  /**
-   * A counter to assign different colors to the {@link QualityMeasure}s
-   */
-  private static int aspectColorCounter = 0;
+	/**
+	 * Serial UID
+	 */
+	private static final long serialVersionUID = -5259190132513158779L;
+	/**
+	 * A counter to assign different colors to the {@link QualityMeasure}s
+	 */
+	private static int aspectColorCounter = 0;
 
-  /**
-   * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the
-   * contents of the given {@link QualityDataRecorder}
-   * 
-   * @param qualityMeasure
-   *          The {@link Aspect}
-   * @param qualityDataRecorder
-   *          The {@link QualityDataRecorder}
-   */
-  public QualityDataPanel(QualityMeasure qualityMeasure, QualityDataRecorder qualityDataRecorder) {
-    super(new BorderLayout());
-    TitledBorder titledBorder = new TitledBorder(qualityMeasure.getName());
-    Color color = Colors.getColor(aspectColorCounter++);
-    titledBorder.setTitleColor(color);
-    setBorder(titledBorder);
+	/**
+	 * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the contents of the given {@link QualityDataRecorder}
+	 * 
+	 * @param qualityMeasure
+	 *            The {@link Aspect}
+	 * @param qualityDataRecorder
+	 *            The {@link QualityDataRecorder}
+	 */
+	public QualityDataPanel(QualityMeasure qualityMeasure, QualityDataRecorder qualityDataRecorder) {
+		super(new BorderLayout());
+		TitledBorder titledBorder = new TitledBorder(qualityMeasure.getName());
+		Color color = Colors.getColor(aspectColorCounter++);
+		titledBorder.setTitleColor(color);
+		setBorder(titledBorder);
 
-    QualityDataRecorderPanel qualityDataRecorderPanel = new QualityDataRecorderPanel(color,
-        qualityDataRecorder);
-    add(qualityDataRecorderPanel, BorderLayout.CENTER);
+		QualityDataRecorderPanel qualityDataRecorderPanel = new QualityDataRecorderPanel(color, qualityDataRecorder);
+		add(qualityDataRecorderPanel, BorderLayout.CENTER);
+	}
+
+	public static void resetColorCounter(){
+	  QualityDataPanel.aspectColorCounter = 0;
   }
 
 }
