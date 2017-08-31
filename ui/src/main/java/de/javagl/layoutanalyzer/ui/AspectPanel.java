@@ -121,4 +121,9 @@ public class AspectPanel extends JPanel {
     controlPanel.add(slider);
     return controlPanel;
   }
+  
+  public static void resetColorCounter(){
+	  AspectPanel.aspectColorCounter = 0;
+  }
+  
 }
