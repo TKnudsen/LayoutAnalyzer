@@ -7,4 +7,7 @@ LayoutAnalyzer.iml
 LayoutAnalyzer.ipr
 LayoutAnalyzer.iws
 bin/
-*/target/
+*target/
+release.properties
+*pom.xml.tag
+*pom.xml.releaseBackup
