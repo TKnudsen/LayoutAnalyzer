@@ -17,9 +17,6 @@ public class LayoutQualities {
   private LayoutAspects forces;
   private List<? extends LayoutObject> layoutObjects;
 
-  /**
-   * Default constructor
-   */
   public LayoutQualities(List<QualityMeasure> qualityMeasures,
       List<? extends LayoutObject> layoutObjects, LayoutAspects forces) {
     Objects.requireNonNull(layoutObjects, "The Layout objects are NULL");

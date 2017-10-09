@@ -61,7 +61,7 @@ public class Layout<T extends LayoutObject> {
   /**
    * Add the given {@link LayoutObject} to this layout
    * 
-   * @param layoutObject
+   * @param object
    *          The {@link LayoutObject}
    */
   public synchronized void addLayoutObject(T object) {
@@ -71,7 +71,7 @@ public class Layout<T extends LayoutObject> {
   /**
    * Remove the given {@link LayoutObject} from this layout
    * 
-   * @param layoutObject
+   * @param object
    *          The {@link LayoutObject}
    */
   public void removeLayoutObject(T object) {

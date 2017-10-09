@@ -69,8 +69,6 @@ public class AspectPanel extends JPanel {
    * 
    * @param aspect
    *          The {@link Aspect}
-   * @param qualityDataRecorder
-   *          The {@link QualityDataRecorder}
    */
   public AspectPanel(Aspect aspect) {
     super(new BorderLayout());

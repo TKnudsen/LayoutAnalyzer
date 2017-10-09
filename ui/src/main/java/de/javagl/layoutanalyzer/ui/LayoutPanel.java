@@ -98,6 +98,9 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
    * 
    * @param layout
    *          The {@link Layout} that should be shown in this panel
+   * 
+   * @param layoutObjectPainter
+   *          The Painter responsible for painting the layout objects in the panel
    */
   public LayoutPanel(Layout<T> layout, LayoutObjectPainter<T> layoutObjectPainter) {
     super();
@@ -162,6 +165,8 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
    * 
    * @param layoutObject
    *          The {@link LayoutObject}
+   *
+   * @return returnes true on success
    */
   public boolean removeLayoutObject(T layoutObject) {
     layout.removeLayoutObject(layoutObject);

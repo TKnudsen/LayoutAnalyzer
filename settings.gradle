@@ -1,7 +1,0 @@
-String name = "LayoutAnalyzer"
-rootProject.name = name
-
-include 'core', 'example', 'ui'
-project(":core").name = "$name-core"
-project(":example").name = "$name-example"
-project(":ui").name = "$name-ui"

@@ -68,8 +68,6 @@ public class AspectPanelSmall extends JPanel {
    * 
    * @param aspect
    *          The {@link Aspect}
-   * @param qualityDataRecorder
-   *          The {@link QualityDataRecorder}
    */
   public AspectPanelSmall(Aspect aspect) {
     super(new BorderLayout());

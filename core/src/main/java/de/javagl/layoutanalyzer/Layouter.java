@@ -124,6 +124,9 @@ public class Layouter<T extends LayoutObject> {
 	 * 
 	 * @param layout
 	 *            The {@link Layout} on which this layouter operates
+	 *
+	 * @param aspects
+	 *			  The {@link Aspect} this layouter has to respect
 	 */
 	public Layouter(Layout<T> layout, List<Aspect> aspects) {
 		Objects.requireNonNull(layout, "The layout is null");
@@ -250,6 +253,10 @@ public class Layouter<T extends LayoutObject> {
 	 * will be applied to the {@link LayoutObject}s. These forces will affect
 	 * the accelerations, velocities and positions of the {@link LayoutObject}
 	 * through a simple time integration.
+	 *
+	 * @param notify
+	 *				whether or not {@link LayouterListener}s that have been 
+	 *				attached are notified about this step
 	 */
 	public void performStep(boolean notify) {
 		LayoutAspects layouterData = computeLayouterData();

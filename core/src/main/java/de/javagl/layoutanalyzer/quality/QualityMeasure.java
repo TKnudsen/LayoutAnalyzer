@@ -19,13 +19,13 @@ public interface QualityMeasure {
    * quality of 1.0 means that the layout of the object can not be improved.<br>
    * <br>
    * A {@link LayoutAspects} may be passed to this method, which has been computed with
-   * {@link #computeLayoutData(List)} before. One has to anticipate that this {@link LayoutAspects}
+   * {@link LayoutAspects#getLayoutData(Aspect)} before. One has to anticipate that this {@link LayoutAspects}
    * may be <code>null</code>. In this case, the {@link LayoutAspects} may be computed internally,
    * if it is required for the computation of the {@link QualityData}.
    * 
    * @param layoutObjects
    *          The {@link LayoutObject}s
-   * @param layoutDataHint
+   * @param aspectforces
    *          The optional {@link LayoutAspects}
    * @return The {@link QualityData}
    */

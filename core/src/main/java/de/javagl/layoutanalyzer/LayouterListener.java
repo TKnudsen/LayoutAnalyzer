@@ -28,7 +28,7 @@ package de.javagl.layoutanalyzer;
 
 /**
  * Interface for classes that may be added to a {@link Layouter} with
- * {@link Layouter#addLayouterListener(LayouterDataListener)}, to be informed about the
+ * {@link Layouter#addLayouterListener(LayouterListener)}, to be informed about the
  * {@link LayoutAspects} that is computed each time {@link Layouter#performStep()} is called.
  */
 public interface LayouterListener {
