@@ -109,6 +109,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 		Objects.requireNonNull(layout, "The layout is null");
 		this.layout = layout;
 		setLayoutObjectPainter(layoutObjectPainter);
+		setBackground(Color.WHITE);
 	}
 
 	/**
@@ -181,7 +182,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 	protected void paintComponent(Graphics gr) {
 		super.paintComponent(gr);
 		Graphics2D g = (Graphics2D) gr;
-		g.setColor(Color.WHITE);
+		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
