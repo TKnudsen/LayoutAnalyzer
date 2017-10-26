@@ -13,23 +13,23 @@ import de.javagl.layoutanalyzer.objects.LayoutObject;
  */
 public class DefaultLayoutObjectPainter<T extends LayoutObject> implements LayoutObjectPainter<T> {
 
-  @Override
-  public void paint(LayoutObject object, Graphics2D graphics) {
-    Shape shape = object.getShape();
+	@Override
+	public void paint(LayoutObject object, Graphics2D graphics) {
+		Shape shape = object.getShape();
 
-    final AffineTransform at = AffineTransform.getScaleInstance(1000, 1000);
-    shape = at.createTransformedShape(shape);
+		final AffineTransform at = AffineTransform.getScaleInstance(1000, 1000);
+		shape = at.createTransformedShape(shape);
 
-    graphics.setColor(new Color(32, 32, 32, 32));
-    graphics.fill(shape);
-    graphics.setColor(Color.GRAY);
-    graphics.draw(shape);
+		graphics.setColor(new Color(32, 32, 32, 32));
+		graphics.fill(shape);
+		graphics.setColor(Color.GRAY);
+		graphics.draw(shape);
 
-    String label = object.getLabel();
-    Rectangle2D stringBounds = graphics.getFontMetrics().getStringBounds(label, graphics);
-    int sx = (int) (-stringBounds.getWidth() * 0.5);
-    int sy = (int) (stringBounds.getHeight() * 0.5);
-    graphics.drawString(label, sx, sy);
-  }
+		String label = object.getLabel();
+		Rectangle2D stringBounds = graphics.getFontMetrics().getStringBounds(label, graphics);
+		int sx = (int) (-stringBounds.getWidth() * 0.5);
+		int sy = (int) (stringBounds.getHeight() * 0.5);
+		graphics.drawString(label, sx, sy);
+	}
 
 }
