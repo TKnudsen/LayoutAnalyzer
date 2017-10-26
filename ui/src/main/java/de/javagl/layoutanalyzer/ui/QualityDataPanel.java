@@ -49,6 +49,8 @@ public class QualityDataPanel extends JPanel {
 	 * A counter to assign different colors to the {@link QualityMeasure}s
 	 */
 	private static int aspectColorCounter = 0;
+	
+	private QualityDataRecorderPanel qualityDataRecorderPanel;
 
 	/**
 	 * Creates a new panel that allows monitoring the given {@link QualityMeasure}, and shows the contents of the given {@link QualityDataRecorder}
@@ -65,12 +67,16 @@ public class QualityDataPanel extends JPanel {
 		titledBorder.setTitleColor(color);
 		setBorder(titledBorder);
 
-		QualityDataRecorderPanel qualityDataRecorderPanel = new QualityDataRecorderPanel(color, qualityDataRecorder);
+		qualityDataRecorderPanel = new QualityDataRecorderPanel(color, qualityDataRecorder);
 		add(qualityDataRecorderPanel, BorderLayout.CENTER);
 	}
 
-	public static void resetColorCounter(){
-	  QualityDataPanel.aspectColorCounter = 0;
-  }
+	public static void resetColorCounter() {
+		QualityDataPanel.aspectColorCounter = 0;
+	}
+
+	public void setFunctionPanelBackground(Color c) {
+		qualityDataRecorderPanel.setFunctionPanelBackground(c);
+	}
 
 }
