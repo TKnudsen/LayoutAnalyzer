@@ -37,7 +37,6 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -100,7 +99,7 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 	 * Whether the {@link JPanel#getBorder()} of this panel is used to draw an
 	 * outline around the painting area of {@link #paintLayoutObjects(Graphics2D)}
 	 */
-	private boolean showOutline = true;
+	private boolean showOutline = false;
 
 	/**
 	 * Default constructor
@@ -194,12 +193,16 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+		int paintingSquareSideLenght = Math.min(getWidth(), getHeight());
+		if (showOutline) {
+			g.setClip(0, 0, paintingSquareSideLenght, paintingSquareSideLenght);
+			paintOutline(g);
+		}
+
 		if (showLayoutObjects)
 			paintLayoutObjects(g);
 		if (showForces)
 			paintForces(g);
-		if (showOutline)
-			paintOutline(g);
 
 	}
 
@@ -282,8 +285,8 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 		if (border == null)
 			return;
 
-		int scale = Math.min(getWidth(), getHeight());
-		border.paintBorder(this, g, 0, 0, scale, scale);
+		int paintingSquareSideLenght = Math.min(getWidth(), getHeight());
+		border.paintBorder(this, g, 0, 0, paintingSquareSideLenght, paintingSquareSideLenght);
 	}
 
 	public boolean isShowForces() {
