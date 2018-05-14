@@ -37,7 +37,9 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Objects;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import de.javagl.geom.ArrowCreator;
 import de.javagl.geom.Arrows;
@@ -93,6 +95,12 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 	 * Whether the shapes of any given {@link LayoutObject} are painted
 	 */
 	private boolean showLayoutObjects = true;
+
+	/**
+	 * Whether the {@link JPanel#getBorder()} of this panel is used to draw an
+	 * outline around the painting area of {@link #paintLayoutObjects(Graphics2D)}
+	 */
+	private boolean showOutline = true;
 
 	/**
 	 * Default constructor
@@ -190,6 +198,9 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 			paintLayoutObjects(g);
 		if (showForces)
 			paintForces(g);
+		if (showOutline)
+			paintOutline(g);
+
 	}
 
 	/**
@@ -258,6 +269,23 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 		}
 	}
 
+	/**
+	 * Paints this components {@link #getBorder()}, if its not <code>null</code>,
+	 * around the painting area of {@link #paintLayoutObjects(Graphics2D)}
+	 * 
+	 * @param g
+	 *            The graphics
+	 */
+	protected void paintOutline(Graphics2D g) {
+		Border border = getBorder();
+
+		if (border == null)
+			return;
+
+		int scale = Math.min(getWidth(), getHeight());
+		border.paintBorder(this, g, 0, 0, scale, scale);
+	}
+
 	public boolean isShowForces() {
 		return showForces;
 	}
@@ -272,5 +300,13 @@ public class LayoutPanel<T extends LayoutObject> extends JPanel {
 
 	public boolean isShowLayoutObjects() {
 		return showLayoutObjects;
+	}
+
+	public void setShowOutline(boolean showOutline) {
+		this.showOutline = showOutline;
+	}
+
+	public boolean isShowOutline() {
+		return showOutline;
 	}
 }
